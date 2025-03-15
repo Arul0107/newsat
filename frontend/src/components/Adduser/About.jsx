@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Typography, Row, Col, Divider } from "antd";
 import { PageHeader } from "@ant-design/pro-components";
 import { DatabaseOutlined, LineChartOutlined, CodeOutlined } from "@ant-design/icons"; // Import icons
-import AccLogo from "../../assets/Acculer-Logo/Acc.png";
+import AccLogo from "../../assets/Acculer-Logo/acc.png";
 import Data from "../../assets/Acculer-Logo/data.png";
 import Alg from "../../assets/Acculer-Logo/alg.png";
 
