@@ -1,17 +1,17 @@
 import React from "react";
 import { Card, Typography, Row, Col, Divider } from "antd";
 import { PageHeader } from "@ant-design/pro-components";
-import { DatabaseOutlined, LineChartOutlined, CodeOutlined } from "@ant-design/icons"; // Import icons
-import AccLogo from "../../assets/Acculer-Logo/acc.png";
-import Data from "../../assets/Acculer-Logo/data.png";
-import Alg from "../../assets/Acculer-Logo/alg.png";
+
+// Import images correctly
+import AccLogo from "/src/assets/Acculer-Logo/acc.png"; // Ensure correct path & lowercase
+import Data from "/src/assets/Acculer-Logo/data.png";
+import Alg from "/src/assets/Acculer-Logo/alg.png";
 
 const { Title, Paragraph } = Typography;
 
 const About = () => {
   return (
-    <div style={{ padding: "24px", }}>
-      {/* Page Header */}
+    <div style={{ padding: "24px" }}>
       <PageHeader
         title="Chronic Kidney Disease Prediction"
         subTitle="Using Machine Learning Algorithms"
@@ -19,7 +19,6 @@ const About = () => {
           background: "white",
           padding: "24px",
           borderRadius: "8px",
-          color: "#fff",
           marginBottom: "24px",
         }}
       />
@@ -27,155 +26,84 @@ const About = () => {
       <Card
         style={{
           marginBottom: "24px",
-          background: "#white",
+          background: "white",
           borderRadius: "10px",
           boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Title level={4} style={{ color: "#333" }}>
-          Introduction
-        </Title>
+        <Title level={4}>Introduction</Title>
         <Paragraph>
           Chronic Kidney Disease (CKD) is one of the most critical health
-          problems due to its increasing prevalence. In this paper, we aim to
-          test the ability of machine learning algorithms for the prediction of
-          chronic kidney disease using the smallest subset of features.
+          problems due to its increasing prevalence. This project aims to test
+          the ability of machine learning algorithms for CKD prediction using a
+          minimal subset of features.
         </Paragraph>
       </Card>
 
-      <Title level={4} style={{ marginBottom: "16px", color: "#333" }}>
+      <Title level={4} style={{ marginBottom: "16px" }}>
         Machine Learning Algorithms
       </Title>
-      <Row gutter={[16, 16]} style={{ display: "flex", flexWrap: "nowrap" }}>
-      {/* Random Forest */}
-      <Col flex={1}> {/* flex={1} ensures equal width */}
-        <Card
-          title="Random Forest"
-          style={{
-            borderRadius: "10px",
-            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-            height: "100%", // Ensure equal height
-          }}
-        >
-          <Paragraph>
-            Random Forest builds multiple decision trees and merges them together
-            to get a more accurate and stable prediction.
-          </Paragraph>
-        </Card>
-      </Col>
+      <Row gutter={[16, 16]}>
+        <Col span={12}>
+          <Card title="Random Forest" style={{ borderRadius: "10px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)" }}>
+            <Paragraph>
+              Random Forest builds multiple decision trees and merges them to
+              get a more accurate and stable prediction.
+            </Paragraph>
+          </Card>
+        </Col>
 
-      {/* XGBoost */}
-      <Col flex={1}> {/* flex={1} ensures equal width */}
-        <Card
-          title="XGBoost"
-          style={{
-            borderRadius: "10px",
-            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-            height: "100%", // Ensure equal height
-          }}
-        >
-          <Paragraph>
-            XGBoost is a gradient boosting algorithm designed for speed and
-            performance, widely used in structured data problems.
-          </Paragraph>
-        </Card>
-      </Col>
-    </Row>
-<Divider/>
-    <Title level={4} style={{ marginBottom: "16px", color: "#333" }}>
-       Technical 
-      </Title>
-    
-      <Row gutter={[16, 16]} style={{ marginTop: "24px" }}>
+        <Col span={12}>
+          <Card title="XGBoost" style={{ borderRadius: "10px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)" }}>
+            <Paragraph>
+              XGBoost is a gradient boosting algorithm designed for speed and
+              performance, widely used in structured data problems.
+            </Paragraph>
+          </Card>
+        </Col>
+      </Row>
+
+      <Divider />
+
+      <Title level={4} style={{ marginBottom: "16px" }}>Technical</Title>
+      <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} md={8}>
-          <Card
-            style={{
-              borderRadius: '10px',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-              height: "100%", // Ensure all cards have the same height
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between", // Center content vertically
-            }}
-          >
+          <Card style={{ borderRadius: "10px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)" }}>
             <div style={{ textAlign: "center" }}>
-            <img
-               src={Data}
-               alt="Kidney Disease"
-               style={{ width: "80px", height: "80px", padding: "0px", borderRadius: "10px" }}
-             />{/* Icon */}              <Title level={4} style={{ color: '#333', marginTop: "8px" }}>
-                Dataset
-              </Title>
+              <img src={Data} alt="Dataset" style={{ width: "80px", height: "80px" }} />
+              <Title level={4} style={{ marginTop: "8px" }}>Dataset</Title>
             </div>
             <Paragraph>
-              We have used the dataset available on Kaggle -{' '}
-              <strong>Chronic Kidney Disease Prediction</strong>. After classifying
-              the data, preprocessing, and performing Exploratory Data Analysis
-              (EDA), this dataset was used for training and testing our models.
+              We used the Kaggle dataset: <strong>Chronic Kidney Disease Prediction</strong>.
+              After preprocessing and Exploratory Data Analysis (EDA), this dataset was used for training.
             </Paragraph>
           </Card>
         </Col>
 
         <Col xs={24} sm={12} md={8}>
-          <Card
-            style={{
-              borderRadius: '10px',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-              height: "100%", // Ensure all cards have the same height
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between", // Center content vertically
-            }}
-          >
+          <Card style={{ borderRadius: "10px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)" }}>
             <div style={{ textAlign: "center" }}>
-               <img
-               src={AccLogo}
-               alt="Kidney Disease"
-               style={{ width: "80px", height: "80px", padding: "0px", borderRadius: "10px" }}
-             />{/* Icon */}
-              <Title level={4} style={{ color: '#333', marginTop: "8px" }}>
-                Accuracy
-              </Title>
+              <img src={AccLogo} alt="Accuracy" style={{ width: "80px", height: "80px" }} />
+              <Title level={4} style={{ marginTop: "8px" }}>Accuracy</Title>
             </div>
             <Paragraph>
-              Random Forest and XGBoost have shown high accuracy in predicting
-              CKD. These models outperform traditional methods in structured data
-              prediction.
+              Random Forest and XGBoost achieved high accuracy in CKD prediction,
+              outperforming traditional methods in structured data classification.
             </Paragraph>
           </Card>
         </Col>
 
         <Col xs={24} sm={12} md={8}>
-          <Card
-            style={{
-              borderRadius: '10px',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-              height: "100%", // Ensure all cards have the same height
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between", // Center content vertically
-            }}
-          >
+          <Card style={{ borderRadius: "10px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)" }}>
             <div style={{ textAlign: "center" }}>
-
-            <img
-               src={Alg}
-               alt="Kidney Disease"
-               style={{ width: "80px", height: "80px", padding: "0px", borderRadius: "10px" }}
-             />
-              <Title level={4} style={{ color: '#333', marginTop: "8px" }}>
-                Algorithm Details
-              </Title>
+              <img src={Alg} alt="Algorithm" style={{ width: "80px", height: "80px" }} />
+              <Title level={4} style={{ marginTop: "8px" }}>Algorithm Details</Title>
             </div>
             <Paragraph>
-              <strong>Random Forest</strong>: A supervised learning algorithm
-              that builds multiple decision trees and merges them for accurate
-              predictions.
+              <strong>Random Forest:</strong> Uses multiple decision trees to improve prediction accuracy.
             </Paragraph>
             <Paragraph>
-              <strong>XGBoost</strong>: A gradient-boosted decision tree
-              algorithm designed for speed and performance, widely used in
-              structured data prediction.
+              <strong>XGBoost:</strong> A gradient-boosted decision tree algorithm optimized for performance.
             </Paragraph>
           </Card>
         </Col>
