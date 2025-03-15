@@ -7,8 +7,9 @@ import AppLayout from "./components/sidebar/AppLayout";
 import Home from "./components/dashboard/Home";
 import About from "./components/Adduser/About";
 import Predict from "./components/profile/Predict";
-import Team from "./components/userprev/Team";
+// import Team from "./components/userprev/Team";
 import Contact from "./components/report/Contact";
+import DetailOutput from "./components/userprev/DetailOutput";
 
 const App = () => {
   return (
@@ -26,7 +27,7 @@ const App = () => {
                 <Route path="/home" element={<Home/>} />
                 <Route path="/about" element={<About />} />
                 <Route path="/prediction" element={<Predict />} />
-                <Route path="/team" element={<Team />} />
+                <Route path="/team" element={<DetailOutput />} />
                 <Route path="/contact" element={<Contact />} />
               </Routes>
             </AppLayout>

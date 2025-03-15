@@ -1,65 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { Layout, Menu, Avatar, Dropdown, Breadcrumb, Spin } from "antd";
+import React, { useState } from "react";
+import { Layout, Menu, Avatar, Breadcrumb, Spin, Button } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
 import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
   DashboardOutlined,
-  LockFilled,
   UserOutlined,
-  UserAddOutlined,
-  EyeFilled,
   AppstoreOutlined,
   SettingOutlined,
-  LogoutOutlined,
 } from "@ant-design/icons";
-import logo from "../../assets/Acculer-Logo/Primary Logo 01.png";
+import logo from "../../assets/Acculer-Logo/logo.jpg";
 
 const { Header, Sider, Content, Footer } = Layout;
 
 const AppLayout = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [loading, setLoading] = useState(true);
-  const [menuItems, setMenuItems] = useState([]);
-  const [userPermissions, setUserPermissions] = useState({});
+  const [collapsed, setCollapsed] = useState(false);
 
-  useEffect(() => {
-    const fetchUserPermissions = async () => {
-      try {
-        const response = await axios.get("/api/employees/your-employee-id/permissions");
-        setUserPermissions(response.data);
-        setMenuItems(getFilteredMenuItems(response.data));
-      } catch (error) {
-        console.error("Failed to fetch user permissions:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const menuItems = [
+    { key: "home", icon: <DashboardOutlined />, label: "Home", path: "/home" },
+    { key: "about", icon: <AppstoreOutlined />, label: "About", path: "/about" },
+    { key: "prediction", icon: <UserOutlined />, label: "Prediction", path: "/prediction" },
+    { key: "team", icon: <AppstoreOutlined />, label: "Team", path: "/team" },
+    { key: "contact", icon: <SettingOutlined />, label: "Contact", path: "/contact" },
+  ];
 
-    fetchUserPermissions();
-  }, []);
-
-  const getFilteredMenuItems = (permissions) => {
-    const allMenuItems = [
-      { key: "home", icon: <DashboardOutlined />, label: "Home", path: "/home" },
-      { key: "about", icon: <AppstoreOutlined />, label: "About", path: "/about" },
-      { key: "prediction", icon: <UserOutlined />, label: "prediction", path: "/prediction" },
-      { key: "team", icon: <AppstoreOutlined />, label: "Team", path: "/team" },
-      { key: "contact", icon: <SettingOutlined />, label: "Contact", path: "/contact" },
-    ];
-
-    return allMenuItems
-      .map((item) => {
-        if (item.children) {
-          const filteredChildren = item.children.filter((child) => permissions[child.key] !== "none");
-          return filteredChildren.length > 0 ? { ...item, children: filteredChildren } : null;
-        }
-        return permissions[item.key] !== "none" ? item : null;
-      })
-      .filter(Boolean);
-  };
-
-  const selectedKey = menuItems.find((item) => item.path === location.pathname)?.key || "dashboard";
+  const selectedKey = menuItems.find((item) => item.path === location.pathname)?.key || "home";
 
   const handleMenuClick = ({ key }) => {
     const selectedItem = menuItems.find((item) => item.key === key);
@@ -67,22 +34,6 @@ const AppLayout = ({ children }) => {
       navigate(selectedItem.path);
     }
   };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
-
-  const userMenu = (
-    <Menu>
-      <Menu.Item key="profile" icon={<UserOutlined />} onClick={() => navigate("/profile")}>
-        Profile
-      </Menu.Item>
-      <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
-        Logout
-      </Menu.Item>
-    </Menu>
-  );
 
   const generateBreadcrumbs = () => {
     const pathParts = location.pathname.split("/").filter((part) => part);
@@ -94,34 +45,44 @@ const AppLayout = ({ children }) => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider width={250} style={{ background: "#fff", overflow: "auto", height: "100vh", position: "fixed", left: 0 }}>
+      {/* Sidebar */}
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={setCollapsed}
+        width={250}
+        style={{
+          background: "#fff",
+          overflow: "auto",
+          height: "100vh",
+          position: "fixed",
+          left: 0,
+          transition: "all 0.3s",
+        }}
+      >
         <div style={{ display: "flex", justifyContent: "center", padding: "16px" }}>
-          <img src={logo} alt="CRM Logo" style={{ width: "150px" }} />
+          <img
+            src={logo}
+            alt="CRM Logo"
+            style={{ width: collapsed ? "50px" : "150px", transition: "width 0.3s" }}
+          />
         </div>
         <Menu theme="light" mode="inline" selectedKeys={[selectedKey]} onClick={handleMenuClick}>
-          {menuItems.map((item) =>
-            item.children ? (
-              <Menu.SubMenu key={item.key} icon={item.icon} title={item.label}>
-                {item.children.map((subItem) => (
-                  <Menu.Item key={subItem.key} onClick={() => navigate(subItem.path)}>
-                    {subItem.icon} {subItem.label}
-                  </Menu.Item>
-                ))}
-              </Menu.SubMenu>
-            ) : (
-              <Menu.Item key={item.key} icon={item.icon} onClick={() => navigate(item.path)}>
-                {item.label}
-              </Menu.Item>
-            )
-          )}
+          {menuItems.map((item) => (
+            <Menu.Item key={item.key} icon={item.icon} onClick={() => navigate(item.path)}>
+              {!collapsed && item.label}
+            </Menu.Item>
+          ))}
         </Menu>
       </Sider>
 
-      <Layout style={{ marginLeft: 250 }}>
+      {/* Main Layout */}
+      <Layout style={{ marginLeft: collapsed ? 80 : 250, transition: "margin-left 0.3s" }}>
+        {/* Header */}
         <Header
           style={{
             position: "fixed",
-            width: "calc(100% - 250px)",
+            width: `calc(100% - ${collapsed ? 80 : 250}px)`,
             top: 0,
             zIndex: 1000,
             padding: "0 16px",
@@ -129,37 +90,38 @@ const AppLayout = ({ children }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            transition: "width 0.3s",
           }}
         >
-          <Breadcrumb>
-            <Breadcrumb.Item key="home" onClick={() => navigate("/")}>
-              Home
-            </Breadcrumb.Item>
-            {generateBreadcrumbs().map((breadcrumb) => (
-              <Breadcrumb.Item key={breadcrumb.path} onClick={() => navigate(breadcrumb.path)}>
-                {breadcrumb.label}
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+            />
+            <Breadcrumb>
+              <Breadcrumb.Item key="home" onClick={() => navigate("/")}>
+                Home
               </Breadcrumb.Item>
-            ))}
-          </Breadcrumb>
-          <Dropdown overlay={userMenu} placement="bottomRight">
-            <div style={{ display: "flex", alignItems: "center", cursor: "pointer", gap: "10px" }}>
-              <Avatar src="https://your-image-url.com/avatar.png" />
-              <span style={{ fontWeight: "bold" }}>John Doe</span>
-            </div>
-          </Dropdown>
+              {generateBreadcrumbs().map((breadcrumb) => (
+                <Breadcrumb.Item key={breadcrumb.path} onClick={() => navigate(breadcrumb.path)}>
+                  {breadcrumb.label}
+                </Breadcrumb.Item>
+              ))}
+            </Breadcrumb>
+          </div>
+
+          <Avatar src="https://your-image-url.com/avatar.png" />
         </Header>
 
+        {/* Content */}
         <Content style={{ marginTop: 64, padding: 24, minHeight: "calc(100vh - 112px)" }}>
-          {loading ? (
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
-              <Spin size="large" />
-            </div>
-          ) : (
-            children
-          )}
+          {children}
         </Content>
 
-        <Footer style={{ textAlign: "center" }}>© 2025 Your CRM System</Footer>
+        {/* Footer */}
+        <Footer style={{ textAlign: "center" }}>Chronic Kidney Disease Prediction
+        </Footer>
       </Layout>
     </Layout>
   );

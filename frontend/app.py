@@ -8,51 +8,45 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import SelectKBest, f_classif
-from sklearn.metrics import accuracy_score, confusion_matrix
-import xgboost as xgb  
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import xgboost as xgb  # Import XGBoost
 
 # Suppress warnings
 import warnings
 warnings.filterwarnings("ignore")
 
-# Light theme with custom CSS
-st.markdown(
-    """
-    <style>
-        body {
-            background-color: #ffffff !important;
-            color: #000000 !important;
-        }
-        .stApp {
-            background-color: #f8f9fa;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
 # Streamlit app title
+st.title("Chronic Kidney Disease Prediction with Model Comparison")
 
 # File uploader for dataset upload
-data_file = st.file_uploader(" Upload a CSV dataset", type=["csv"])
+data_file = st.file_uploader("Upload a CSV dataset", type=["csv"])
 
 if data_file is not None:
     # Read the uploaded dataset
     df = pd.read_csv(data_file)
-    st.write("### 📜 Uploaded Dataset:")
+    st.write("### Uploaded Dataset:")
     st.dataframe(df.head())
 
     # Preprocessing steps
     if 'id' in df.columns:
-        df.drop('id', axis=1, inplace=True)
+        df.drop('id', axis=1, inplace=True)  # Drop ID column if exists
+
+    # Rename columns (ensure consistency)
+    df.columns = ['age', 'bp', 'sg', 'al', 'su', 'rbc', 'pc', 'pcc', 'ba', 'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo',
+                  'pcv', 'wc', 'rc', 'htn', 'dm', 'cad', 'appet', 'pe', 'ane', 'classification']
+
+    # Convert columns to numeric where needed
+    df['pcv'] = pd.to_numeric(df['pcv'], errors='coerce')
+    df['wc'] = pd.to_numeric(df['wc'], errors='coerce')
+    df['rc'] = pd.to_numeric(df['rc'], errors='coerce')
 
     # Handle missing values
     df.fillna(df.median(numeric_only=True), inplace=True)
     for col in df.select_dtypes(include='object').columns:
         df[col].fillna(df[col].mode()[0], inplace=True)
 
-        # Encode categorical variables
-        label_encoder = LabelEncoder()
+    # Encode categorical variables
+    label_encoder = LabelEncoder()
     for col in df.select_dtypes(include='object').columns:
         df[col] = label_encoder.fit_transform(df[col])
 
@@ -87,7 +81,7 @@ if data_file is not None:
     xgb_accuracy = accuracy_score(y_test, xgb_predictions)
 
     # Display accuracy comparison
-    st.write("### 📊 Model Accuracy Comparison")
+    st.write("### Model Accuracy Comparison")
     fig, ax = plt.subplots()
     ax.bar(["Random Forest", "XGBoost"], [rf_accuracy, xgb_accuracy], color=['blue', 'red'])
     ax.set_ylabel("Accuracy")
@@ -95,7 +89,7 @@ if data_file is not None:
     st.pyplot(fig)
 
     # Confusion Matrices
-    st.write("### 📌 Confusion Matrices")
+    st.write("### Confusion Matrices")
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
     sns.heatmap(confusion_matrix(y_test, rf_predictions), annot=True, fmt='d', cmap='Blues', ax=axes[0])
     axes[0].set_title("Random Forest Confusion Matrix")
@@ -104,10 +98,10 @@ if data_file is not None:
     st.pyplot(fig)
 
     # Model selection for prediction
-    model_choice = st.selectbox("🛠️ Select Model for Prediction", ["Random Forest", "XGBoost"])
+    model_choice = st.selectbox("Select Model for Prediction", ["Random Forest", "XGBoost"])
 
     # Individual Record Entry
-    st.write("### 🧪 Predict CKD for an Individual Record")
+    st.write("### Predict CKD for an Individual Record")
     individual_data = {}
     for col in X.columns:
         if col in df.select_dtypes(include=['object']).columns:
@@ -116,5 +110,22 @@ if data_file is not None:
         else:
             individual_data[col] = st.number_input(f"{col}", value=float(df[col].median()))
 
+    if st.button("Predict CKD"):
+        individual_df = pd.DataFrame([individual_data])
+        for col in individual_df.select_dtypes(include='object').columns:
+            individual_df[col] = label_encoder.transform(individual_df[col])
+        individual_df = individual_df[selected_features]
+        individual_df = scaler.transform(individual_df)
+        prediction = rf_model.predict(individual_df)[0] if model_choice == "Random Forest" else xgb_model.predict(individual_df)[0]
+        st.write("### Individual Prediction Result")
+        st.write("CKD" if prediction == 1 else "No CKD")
 
- 
+    # Predict CKD for all records
+    st.write("### Predict CKD for All Records")
+    if st.button("Predict for All Records"):
+        all_predictions = rf_model.predict(X_test_selected) if model_choice == "Random Forest" else xgb_model.predict(X_test_selected)
+        X_test_with_predictions = X_test.copy()
+        X_test_with_predictions['Prediction'] = ["CKD" if pred == 1 else "No CKD" for pred in all_predictions]
+        st.write(X_test_with_predictions)
+else:
+    st.write("Please upload a dataset to proceed.")
