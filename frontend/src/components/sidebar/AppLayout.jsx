@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Layout, Menu, Avatar, Breadcrumb, Spin, Button } from "antd";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Layout, Menu, Avatar, Breadcrumb, Button } from "antd";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -13,7 +13,7 @@ import logo from "../../assets/Acculer-Logo/logo.jpg";
 
 const { Header, Sider, Content, Footer } = Layout;
 
-const AppLayout = ({ children }) => {
+const AppLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
@@ -35,13 +35,13 @@ const AppLayout = ({ children }) => {
     }
   };
 
-  const generateBreadcrumbs = () => {
-    const pathParts = location.pathname.split("/").filter((part) => part);
-    return pathParts.map((part, index) => ({
-      path: `/${pathParts.slice(0, index + 1).join("/")}`,
+  const breadcrumbs = location.pathname
+    .split("/")
+    .filter((part) => part)
+    .map((part, index, arr) => ({
+      path: `/${arr.slice(0, index + 1).join("/")}`,
       label: part.charAt(0).toUpperCase() + part.slice(1),
     }));
-  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -67,13 +67,17 @@ const AppLayout = ({ children }) => {
             style={{ width: collapsed ? "50px" : "150px", transition: "width 0.3s" }}
           />
         </div>
-        <Menu theme="light" mode="inline" selectedKeys={[selectedKey]} onClick={handleMenuClick}>
-          {menuItems.map((item) => (
-            <Menu.Item key={item.key} icon={item.icon} onClick={() => navigate(item.path)}>
-              {!collapsed && item.label}
-            </Menu.Item>
-          ))}
-        </Menu>
+        <Menu
+          theme="light"
+          mode="inline"
+          selectedKeys={[selectedKey]}
+          onClick={handleMenuClick}
+          items={menuItems.map((item) => ({
+            key: item.key,
+            icon: item.icon,
+            label: item.label,
+          }))}
+        />
       </Sider>
 
       {/* Main Layout */}
@@ -99,16 +103,16 @@ const AppLayout = ({ children }) => {
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               onClick={() => setCollapsed(!collapsed)}
             />
-            <Breadcrumb>
-              <Breadcrumb.Item key="home" onClick={() => navigate("/")}>
-                Home
-              </Breadcrumb.Item>
-              {generateBreadcrumbs().map((breadcrumb) => (
-                <Breadcrumb.Item key={breadcrumb.path} onClick={() => navigate(breadcrumb.path)}>
-                  {breadcrumb.label}
-                </Breadcrumb.Item>
-              ))}
-            </Breadcrumb>
+            <Breadcrumb
+              items={[
+                { title: "Home", path: "/" },
+                ...breadcrumbs.map((breadcrumb) => ({
+                  title: breadcrumb.label,
+                  path: breadcrumb.path,
+                  onClick: () => navigate(breadcrumb.path),
+                })),
+              ]}
+            />
           </div>
 
           <Avatar src="https://your-image-url.com/avatar.png" />
@@ -116,11 +120,12 @@ const AppLayout = ({ children }) => {
 
         {/* Content */}
         <Content style={{ marginTop: 64, padding: 24, minHeight: "calc(100vh - 112px)" }}>
-          {children}
+          <Outlet />
         </Content>
 
         {/* Footer */}
-        <Footer style={{ textAlign: "center" }}>Chronic Kidney Disease Prediction
+        <Footer style={{ textAlign: "center" }}>
+          Chronic Kidney Disease Prediction
         </Footer>
       </Layout>
     </Layout>

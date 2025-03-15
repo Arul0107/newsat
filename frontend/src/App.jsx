@@ -18,7 +18,7 @@ const App = () => {
           {/* Redirect root path to /home */}
           <Route path="/" element={<Navigate to="/home" replace />} />
 
-          {/* Nested routes under AppLayout */}
+          {/* Nested routes inside AppLayout */}
           <Route path="/" element={<AppLayout />}>
             <Route path="home" element={<Home />} />
             <Route path="about" element={<About />} />

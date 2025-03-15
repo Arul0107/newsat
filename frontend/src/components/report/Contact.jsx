@@ -5,7 +5,7 @@ import contactImage from '../../assets/Acculer-Logo/contact.png'; // Replace wit
 const { Title, Paragraph } = Typography;
 
 const Contact = () => {
-  const [form] = Form.useForm(); // Form instance
+  const [form] = Form.useForm(); // z z Form instance
 
   const onFinish = (values) => {
     console.log('Form values:', values); // Handle form submission
