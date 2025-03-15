@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Typography, Row, Col, Divider } from "antd";
 import { PageHeader } from "@ant-design/pro-components";
 import { DatabaseOutlined, LineChartOutlined, CodeOutlined } from "@ant-design/icons"; // Import icons
-import Accu from "../../assets/Acculer-Logo/Acc.png";
+import AccLogo from "../../assets/Acculer-Logo/Acc.png";
 import Data from "../../assets/Acculer-Logo/data.png";
 import Alg from "../../assets/Acculer-Logo/alg.png";
 
@@ -129,7 +129,7 @@ const About = () => {
           >
             <div style={{ textAlign: "center" }}>
                <img
-               src={Accu}
+               src={AccLogo}
                alt="Kidney Disease"
                style={{ width: "80px", height: "80px", padding: "0px", borderRadius: "10px" }}
              />{/* Icon */}
