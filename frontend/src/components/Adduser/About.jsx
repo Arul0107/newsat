@@ -3,8 +3,6 @@ import { Card, Typography, Row, Col, Divider, Table } from "antd";
 import { PageHeader } from "@ant-design/pro-components";
 import { MedicineBoxOutlined } from "@ant-design/icons";
 
-
-
 const { Title, Paragraph } = Typography;
 
 const columns = [
@@ -94,82 +92,11 @@ const About = () => {
       >
         <Title level={4}>Introduction</Title>
         <Paragraph>
-          Chronic Kidney Disease (CKD) is one of the most critical health
-          problems due to its increasing prevalence. This project aims to test
-          the ability of machine learning algorithms for CKD prediction using a
-          minimal subset of features.
+          Chronic Kidney Disease (CKD) is a significant health concern due to its increasing prevalence. 
+          This project explores the effectiveness of machine learning algorithms in CKD prediction using 
+          a minimal yet informative subset of features.
         </Paragraph>
       </Card>
-
-      <Title level={4} style={{ marginBottom: "16px" }}>
-        Machine Learning Algorithms
-      </Title>
-      <Row gutter={[16, 16]}>
-        <Col span={12} style={{ display: "flex" }}>
-          <Card
-            title="Random Forest"
-            style={{
-              borderRadius: "10px",
-              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              height: "100%",
-            }}
-          >
-            <Paragraph>
-              <strong>Random Forest:</strong>
-              <ul>
-                <li>A powerful machine learning algorithm used for classification and regression.</li>
-                <li>Utilizes multiple decision trees to enhance accuracy and reduce overfitting.</li>
-                <li>Each tree is trained on a randomly selected subset of data.</li>
-                <li>
-                  Final predictions are based on:
-                  <ul>
-                    <li><strong>Majority voting</strong> for classification tasks.</li>
-                    <li><strong>Averaging</strong> for regression tasks.</li>
-                  </ul>
-                </li>
-                <li>Effectively handles large datasets and missing values.</li>
-                <li>Widely used in various applications due to its robustness and reliability.</li>
-              </ul>
-            </Paragraph>
-          </Card>
-        </Col>
-
-        <Col span={12} style={{ display: "flex" }}>
-          <Card
-            title="XGBoost"
-            style={{
-              borderRadius: "10px",
-              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              height: "100%",
-            }}
-          >
-            <Paragraph>
-              <strong>XGBoost (Extreme Gradient Boosting):</strong>
-              <ul>
-                <li>A highly efficient and powerful machine learning algorithm based on gradient boosting.</li>
-                <li>Widely used for classification and regression due to its speed and high performance.</li>
-                <li>Constructs decision trees sequentially, with each new tree correcting the errors of the previous ones.</li>
-                <li>
-                  Incorporates advanced features such as:
-                  <ul>
-                    <li><strong>Regularization</strong> (L1 & L2) to prevent overfitting.</li>
-                    <li><strong>Parallel processing</strong> for faster computations.</li>
-                    <li><strong>Built-in handling of missing values</strong> for robustness.</li>
-                  </ul>
-                </li>
-                <li>Commonly used in data science competitions and real-world applications due to its effectiveness.</li>
-              </ul>
-            </Paragraph>
-          </Card>
-        </Col>
-      </Row>
-
       <Divider />
 
       <Title level={3}>
@@ -179,6 +106,104 @@ const About = () => {
 
       <Divider />
 
+      <Title level={4} style={{ marginBottom: "16px" }}>
+        Machine Learning Algorithms
+      </Title>
+      <Row gutter={[16, 16]}>
+        <Col span={12}>
+          <Card
+            title="Random Forest"
+            style={{
+              borderRadius: "10px",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Paragraph>
+              <strong>Random Forest:</strong>
+              <ul>
+                <li>Powerful algorithm used for classification and regression.</li>
+                <li>Uses multiple decision trees to improve accuracy and reduce overfitting.</li>
+                <li>Each tree is trained on a randomly selected subset of data.</li>
+                <li>
+                  Final predictions are based on:
+                  <ul>
+                    <li><strong>Majority voting</strong> for classification tasks.</li>
+                    <li><strong>Averaging</strong> for regression tasks.</li>
+                  </ul>
+                </li>
+                <li>Effectively handles large datasets and missing values.</li>
+                <li>Widely used due to its robustness and reliability.</li>
+              </ul>
+            </Paragraph>
+          </Card>
+        </Col>
+
+        <Col span={12}>
+          <Card
+            title="XGBoost"
+            style={{
+              borderRadius: "10px",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Paragraph>
+              <strong>XGBoost (Extreme Gradient Boosting):</strong>
+              <ul>
+                <li>Highly efficient and powerful algorithm based on gradient boosting.</li>
+                <li>Used for classification and regression due to its speed and accuracy.</li>
+                <li>Constructs decision trees sequentially, with each new tree correcting previous errors.</li>
+                <li>
+                  Features include:
+                  <ul>
+                    <li><strong>Regularization</strong> (L1 & L2) to prevent overfitting.</li>
+                    <li><strong>Parallel processing</strong> for faster computation.</li>
+                    <li><strong>Built-in handling of missing values</strong> for robustness.</li>
+                  </ul>
+                </li>
+                <li>Popular in data science competitions and real-world applications.</li>
+              </ul>
+            </Paragraph>
+            
+          </Card>
+          
+        </Col>
+        <Card
+        style={{
+          marginBottom: "24px",
+          background: "white",
+          borderRadius: "10px",
+          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Title level={4}>Our Website's Purpose</Title>
+        <Paragraph>
+          Our platform aims to provide accurate CKD predictions using advanced machine learning models like 
+          <strong> XGBoost</strong> and <strong>Random Forest</strong>. By analyzing crucial health indicators—such as 
+          blood test results (creatinine, urea), urine analysis (albumin levels), and patient demographics (age, medical history)—our 
+          system helps detect CKD risk in its early stages.
+        </Paragraph>
+        <Paragraph>
+          <strong>Our Goals:</strong>
+          <ul>
+            <li>Empower healthcare professionals and individuals with timely risk assessment tools.</li>
+            <li>Compare the predictive accuracy of XGBoost and Random Forest models.</li>
+            <li>Raise awareness about CKD causes, symptoms, and prevention strategies.</li>
+            <li>Ensure user-friendly access to our findings and facilitate potential scalability for mobile apps or clinical software.</li>
+            <li>Contribute to research by sharing our methodology and results to support innovation in predictive healthcare.</li>
+          </ul>
+        </Paragraph>
+        <Paragraph>
+          By integrating cutting-edge technology with accessible healthcare solutions, we strive to mitigate the global burden of CKD.
+        </Paragraph>
+      </Card>
+      <Divider />
+      </Row>
+
+      
     </div>
   );
 };
