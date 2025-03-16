@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Layout, Menu, Avatar, Breadcrumb, Button } from "antd";
+import { Layout, Menu, Avatar, Breadcrumb, Button, Tooltip } from "antd";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import {
   MenuUnfoldOutlined,
@@ -22,7 +22,7 @@ const AppLayout = () => {
     { key: "home", icon: <DashboardOutlined />, label: "Home", path: "/home" },
     { key: "about", icon: <AppstoreOutlined />, label: "About", path: "/about" },
     { key: "prediction", icon: <UserOutlined />, label: "Prediction", path: "/prediction" },
-    { key: "team", icon: <AppstoreOutlined />, label: "Team", path: "/team" },
+    { key: "team", icon: <AppstoreOutlined />, label: "Detail Output", path: "/team" },
     { key: "contact", icon: <SettingOutlined />, label: "Contact", path: "/contact" },
   ];
 
@@ -64,20 +64,18 @@ const AppLayout = () => {
           <img
             src={logo}
             alt="CRM Logo"
-            style={{ width: collapsed ? "50px" : "150px", transition: "width 0.3s" }}
+            style={{ width: collapsed ? "50px" : "80px", transition: "width 0.3s" }}
           />
         </div>
-        <Menu
-          theme="light"
-          mode="inline"
-          selectedKeys={[selectedKey]}
-          onClick={handleMenuClick}
-          items={menuItems.map((item) => ({
-            key: item.key,
-            icon: item.icon,
-            label: item.label,
-          }))}
-        />
+        <Menu theme="light" mode="inline" selectedKeys={[selectedKey]} onClick={handleMenuClick}>
+          {menuItems.map((item) => (
+            <Menu.Item key={item.key} icon={item.icon}>
+              <Tooltip title={item.label} placement="right">
+                {item.label}
+              </Tooltip>
+            </Menu.Item>
+          ))}
+        </Menu>
       </Sider>
 
       {/* Main Layout */}
@@ -98,24 +96,31 @@ const AppLayout = () => {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-            />
-            <Breadcrumb
-              items={[
-                { title: "Home", path: "/" },
-                ...breadcrumbs.map((breadcrumb) => ({
-                  title: breadcrumb.label,
-                  path: breadcrumb.path,
-                  onClick: () => navigate(breadcrumb.path),
-                })),
-              ]}
-            />
+            <Tooltip title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"} placement="bottom">
+              <Button
+                type="text"
+                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                onClick={() => setCollapsed(!collapsed)}
+              />
+            </Tooltip>
+            <Breadcrumb>
+              <Breadcrumb.Item>
+                <Tooltip title="Home">
+                  <span onClick={() => navigate("/")}>Home</span>
+                </Tooltip>
+              </Breadcrumb.Item>
+              {breadcrumbs.map((breadcrumb) => (
+                <Breadcrumb.Item key={breadcrumb.path}>
+                    <span onClick={() => navigate(breadcrumb.path)}>{breadcrumb.label}</span>
+                 
+                </Breadcrumb.Item>
+              ))}
+            </Breadcrumb>
           </div>
 
-          <Avatar src="https://your-image-url.com/avatar.png" />
+          <Tooltip title="View Profile">
+            <Avatar src={logo} />
+          </Tooltip>
         </Header>
 
         {/* Content */}

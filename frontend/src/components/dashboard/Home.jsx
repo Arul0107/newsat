@@ -15,30 +15,118 @@ const Home = () => {
               Chronic Kidney Disease (CKD)
             </Title>
             <Paragraph style={{ fontSize: "16px", lineHeight: "1.6" }}>
-              <strong>Overview:</strong> Chronic Kidney Disease (CKD) is a
-              progressive condition marked by the gradual decline of kidney
-              function, impairing the body's ability to filter waste, excess
-              fluids, and toxins from the blood. The kidneys—two bean-shaped
-              organs located below the ribcage—play a critical role in
-              maintaining homeostasis by regulating electrolytes (e.g., sodium,
-              potassium, calcium), balancing acid-base levels, controlling blood
-              pressure via the renin-angiotensin system, and producing
-              erythropoietin to stimulate red blood cell production.
+              <strong>Overview:</strong>
+              <ul>
+                <li>
+                  CKD is a long-term, progressive condition where kidneys
+                  gradually lose function.
+                </li>
+                <li>
+                  Key kidney functions:
+                  <ul>
+                    <li>
+                      Filtering waste, excess fluids, and toxins from the
+                      bloodstream.
+                    </li>
+                    <li>Maintaining electrolyte balance.</li>
+                    <li>Regulating blood pressure.</li>
+                    <li>Producing hormones for red blood cell production.</li>
+                  </ul>
+                </li>
+                <li>
+                  Progresses silently over years, with mild or no symptoms in
+                  early stages.
+                </li>
+                <li>
+                  Early detection is difficult but crucial for management.
+                </li>
+              </ul>
             </Paragraph>
+
             <Paragraph style={{ fontSize: "16px", lineHeight: "1.6" }}>
-              CKD affects approximately 13-15% of the global population, with
-              over 850 million people impacted worldwide, according to the
-              International Society of Nephrology. In the United States alone,
-              the CDC estimates that 37 million adults have CKD, though 9 in 10
-              remain undiagnosed due to its insidious onset.
+              <strong>Progression & Stages:</strong>
+              <ul>
+                <li>
+                  Progression depends on factors like:
+                  <ul>
+                    <li>Underlying causes.</li>
+                    <li>Lifestyle and genetics.</li>
+                    <li>Medical management.</li>
+                  </ul>
+                </li>
+                <li>
+                  Common causes:
+                  <ul>
+                    <li>Diabetes.</li>
+                    <li>Hypertension.</li>
+                    <li>Chronic infections.</li>
+                    <li>
+                      Genetic disorders (e.g., polycystic kidney disease).
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  CKD is classified into five stages based on Glomerular
+                  Filtration Rate (GFR):
+                  <ul>
+                    <li>
+                      <strong>Stage 1 & 2:</strong> Kidney damage with minimal
+                      functional loss.
+                    </li>
+                    <li>
+                      <strong>Stage 3:</strong> Moderate impairment; symptoms
+                      like fatigue, swelling, urinary changes.
+                    </li>
+                    <li>
+                      <strong>Stage 4:</strong> Severe kidney function loss.
+                    </li>
+                    <li>
+                      <strong>Stage 5 (ESRD):</strong> End-stage renal disease
+                      requiring dialysis or transplant.
+                    </li>
+                  </ul>
+                </li>
+              </ul>
             </Paragraph>
+
             <Paragraph style={{ fontSize: "16px", lineHeight: "1.6" }}>
-              <strong>Common Causes:</strong> Diabetes, high blood pressure,
-              glomerulonephritis, and genetic conditions.
-            </Paragraph>
-            <Paragraph style={{ fontSize: "16px", lineHeight: "1.6" }}>
-              <strong>Symptoms:</strong> Fatigue, swelling in legs, changes in
-              urination, nausea, and shortness of breath.
+              <strong>Progression Rate & Management:</strong>
+              <ul>
+                <li>
+                  Progression varies:
+                  <ul>
+                    <li>
+                      Some individuals maintain stable kidney function for years
+                      with proper treatment.
+                    </li>
+                    <li>
+                      Others experience rapid decline if risk factors are
+                      uncontrolled.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Key risk factors for rapid progression:
+                  <ul>
+                    <li>High blood pressure.</li>
+                    <li>Diabetes.</li>
+                    <li>Smoking.</li>
+                    <li>Obesity.</li>
+                  </ul>
+                </li>
+                <li>
+                  Average progression to ESRD takes years or decades, but can be
+                  faster in unmanaged cases.
+                </li>
+                <li>
+                  Early diagnosis and intervention help slow progression:
+                  <ul>
+                    <li>Routine blood and urine tests.</li>
+                    <li>Lifestyle modifications.</li>
+                    <li>Medications.</li>
+                  </ul>
+                </li>
+              </ul>
             </Paragraph>
           </Card>
         </Col>
@@ -48,11 +136,11 @@ const Home = () => {
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={12}>
               <img
-                src={kd1}
+                src={kd2}
                 alt="Kidney Disease"
                 style={{
                   width: "100%",
-                  height: "200px",
+                  height: "300px",
                   padding: "0px",
                   borderRadius: "10px",
                 }}
@@ -60,11 +148,11 @@ const Home = () => {
             </Col>
             <Col xs={24} sm={12}>
               <img
-                src={kd2}
+                src={kd1}
                 alt="Kidney Disease"
                 style={{
                   width: "100%",
-                  height: "200px",
+                  height: "300px",
                   padding: "0px",
                   borderRadius: "10px",
                 }}
