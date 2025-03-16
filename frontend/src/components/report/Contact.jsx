@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Form, Input, Button, Typography, Image } from "antd";
+import { Row, Col, Form, Input, Button, Typography, Image, message } from "antd";
 import contactImage from "../../assets/Acculer-Logo/contact.png"; // Replace with your image path
 
 const { Title, Paragraph } = Typography;
@@ -9,30 +9,38 @@ const Contact = () => {
 
   const onFinish = (values) => {
     console.log("Form values:", values);
-    alert("Thank you for contacting us!");
+    message.success("Thank you for contacting us!");
     form.resetFields();
+  };
+
+  // Custom email validation to block a specific email
+  const validateEmail = (_, value) => {
+    if (value && value.toLowerCase() === "sathiyasivaprakasan@gmail.com") {
+      return Promise.reject(new Error("This email is already in use. Please use a different one."));
+    }
+    return Promise.resolve();
   };
 
   return (
     <div
       style={{
-        minHeight: "100vh", // Full page height
+        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         padding: "24px",
-        backgroundColor: "#f9f9f9", // Optional: Light background for better contrast
+        backgroundColor: "#f9f9f9",
       }}
     >
       <Row
         gutter={[24, 24]}
         style={{
           width: "100%",
-          maxWidth: "900px", // Restrict width for better layout
+          maxWidth: "900px",
           background: "#fff",
           padding: "32px",
           borderRadius: "8px",
-          boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", // Soft shadow effect
+          boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
         }}
       >
         {/* Left Side: Contact Form */}
@@ -55,6 +63,7 @@ const Contact = () => {
               rules={[
                 { required: true, message: "Please enter your email!" },
                 { type: "email", message: "Please enter a valid email!" },
+                { validator: validateEmail }, // Custom email validator
               ]}
             >
               <Input placeholder="Enter your email" />
@@ -69,7 +78,7 @@ const Contact = () => {
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" block>
+              <Button type="primary" htmlType="submit" block style={{ transition: "0.3s" }}>
                 Submit
               </Button>
             </Form.Item>
