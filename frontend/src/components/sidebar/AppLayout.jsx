@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Layout, Menu, Avatar, Breadcrumb, Button, Tooltip } from "antd";
+import React, { useState, useEffect } from "react";
+import { Layout, Menu, Avatar, Breadcrumb, Button, Tooltip, Drawer } from "antd";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import {
   MenuUnfoldOutlined,
@@ -8,6 +8,7 @@ import {
   UserOutlined,
   AppstoreOutlined,
   SettingOutlined,
+  MenuOutlined
 } from "@ant-design/icons";
 import logo from "../../assets/Acculer-Logo/logo.jpg";
 
@@ -17,7 +18,10 @@ const AppLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
 
+  // Menu items configuration
   const menuItems = [
     { key: "home", icon: <DashboardOutlined />, label: "Home", path: "/home" },
     { key: "about", icon: <AppstoreOutlined />, label: "About", path: "/about" },
@@ -28,13 +32,40 @@ const AppLayout = () => {
 
   const selectedKey = menuItems.find((item) => item.path === location.pathname)?.key || "home";
 
+  // Check for mobile screen size and auto-collapse sidebar
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setCollapsed(true);
+      }
+    };
+
+    // Initial check
+    checkScreenSize();
+
+    // Listen for window resize
+    window.addEventListener("resize", checkScreenSize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
+
+  // Handle navigation from menu
   const handleMenuClick = ({ key }) => {
     const selectedItem = menuItems.find((item) => item.key === key);
     if (selectedItem) {
       navigate(selectedItem.path);
+      if (isMobile) {
+        setDrawerVisible(false);
+      }
     }
   };
 
+  // Generate breadcrumbs from current path
   const breadcrumbs = location.pathname
     .split("/")
     .filter((part) => part)
@@ -43,48 +74,92 @@ const AppLayout = () => {
       label: part.charAt(0).toUpperCase() + part.slice(1),
     }));
 
+  // Render the menu component for reuse in both sidebar and drawer
+  const renderMenu = () => (
+    <Menu 
+      theme="light" 
+      mode="inline" 
+      selectedKeys={[selectedKey]} 
+      onClick={handleMenuClick}
+      style={{ border: "none" }}
+    >
+      {menuItems.map((item) => (
+        <Menu.Item key={item.key} icon={item.icon}>
+          <span>{item.label}</span>
+        </Menu.Item>
+      ))}
+    </Menu>
+  );
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      {/* Sidebar */}
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={setCollapsed}
+      {/* Desktop Sidebar - hidden on mobile */}
+      {!isMobile && (
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={setCollapsed}
+          width={250}
+          style={{
+            background: "#fff",
+            overflow: "auto",
+            height: "100vh",
+            position: "fixed",
+            left: 0,
+            transition: "all 0.3s",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+            zIndex: 1001
+          }}
+          trigger={null}
+        >
+          <div style={{ 
+            display: "flex", 
+            justifyContent: "center", 
+            padding: "16px",
+            borderBottom: "1px solid #f0f0f0" 
+          }}>
+            <img
+              src={logo}
+              alt="CRM Logo"
+              style={{ 
+                width: collapsed ? "40px" : "80px", 
+                height: collapsed ? "40px" : "auto",
+                transition: "width 0.3s",
+                objectFit: "contain"
+              }}
+            />
+          </div>
+          {renderMenu()}
+        </Sider>
+      )}
+
+      {/* Mobile Drawer - only shown on mobile */}
+      <Drawer
+        title={
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img src={logo} alt="Logo" style={{ height: "30px", marginRight: "10px" }} />
+            <span>CKD Prediction</span>
+          </div>
+        }
+        placement="left"
+        onClose={() => setDrawerVisible(false)}
+        open={drawerVisible}
+        bodyStyle={{ padding: 0 }}
         width={250}
-        style={{
-          background: "#fff",
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0,
-          transition: "all 0.3s",
-        }}
       >
-        <div style={{ display: "flex", justifyContent: "center", padding: "16px" }}>
-          <img
-            src={logo}
-            alt="CRM Logo"
-            style={{ width: collapsed ? "50px" : "80px", transition: "width 0.3s" }}
-          />
-        </div>
-        <Menu theme="light" mode="inline" selectedKeys={[selectedKey]} onClick={handleMenuClick}>
-          {menuItems.map((item) => (
-            <Menu.Item key={item.key} icon={item.icon}>
-              <Tooltip title={item.label} placement="right">
-                {item.label}
-              </Tooltip>
-            </Menu.Item>
-          ))}
-        </Menu>
-      </Sider>
+        {renderMenu()}
+      </Drawer>
 
       {/* Main Layout */}
-      <Layout style={{ marginLeft: collapsed ? 80 : 250, transition: "margin-left 0.3s" }}>
+      <Layout style={{ 
+        marginLeft: isMobile ? 0 : (collapsed ? 80 : 250), 
+        transition: "margin-left 0.3s" 
+      }}>
         {/* Header */}
         <Header
           style={{
             position: "fixed",
-            width: `calc(100% - ${collapsed ? 80 : 250}px)`,
+            width: isMobile ? "100%" : `calc(100% - ${collapsed ? 80 : 250}px)`,
             top: 0,
             zIndex: 1000,
             padding: "0 16px",
@@ -93,43 +168,75 @@ const AppLayout = () => {
             alignItems: "center",
             justifyContent: "space-between",
             transition: "width 0.3s",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <Tooltip title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"} placement="bottom">
+            {isMobile ? (
+              <Button
+                type="text"
+                icon={<MenuOutlined />}
+                onClick={() => setDrawerVisible(true)}
+              />
+            ) : (
               <Button
                 type="text"
                 icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 onClick={() => setCollapsed(!collapsed)}
               />
-            </Tooltip>
-            <Breadcrumb>
+            )}
+            
+            <Breadcrumb style={{ 
+              display: isMobile ? "none" : "flex",
+              alignItems: "center" 
+            }}>
               <Breadcrumb.Item>
-                <Tooltip title="Home">
-                  <span onClick={() => navigate("/")}>Home</span>
-                </Tooltip>
+                <span 
+                  onClick={() => navigate("/")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Home
+                </span>
               </Breadcrumb.Item>
               {breadcrumbs.map((breadcrumb) => (
                 <Breadcrumb.Item key={breadcrumb.path}>
-                    <span onClick={() => navigate(breadcrumb.path)}>{breadcrumb.label}</span>
-                 
+                  <span 
+                    onClick={() => navigate(breadcrumb.path)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {breadcrumb.label}
+                  </span>
                 </Breadcrumb.Item>
               ))}
             </Breadcrumb>
           </div>
 
-          <Tooltip title="View Profile">
-            <Avatar src={logo} />
-          </Tooltip>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {isMobile && (
+              <span style={{ marginRight: "15px", fontWeight: "500" }}>
+                {breadcrumbs.length > 0 ? breadcrumbs[breadcrumbs.length - 1].label : "Home"}
+              </span>
+            )}
+            <Avatar src={logo} size={isMobile ? "small" : "default"} />
+          </div>
         </Header>
 
         {/* Content */}
-        <Content style={{ marginTop: 64, padding: 24, minHeight: "calc(100vh - 112px)" }}>
+        <Content style={{ 
+          marginTop: 64, 
+          padding: isMobile ? 12 : 24, 
+          minHeight: "calc(100vh - 112px)",
+          overflow: "auto"
+        }}>
           <Outlet />
         </Content>
 
         {/* Footer */}
-        <Footer style={{ textAlign: "center" }}>
+        <Footer style={{ 
+          textAlign: "center",
+          padding: isMobile ? "10px" : "20px",
+          fontSize: isMobile ? "12px" : "14px"
+        }}>
           Chronic Kidney Disease Prediction
         </Footer>
       </Layout>

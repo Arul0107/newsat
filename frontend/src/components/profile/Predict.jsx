@@ -3,7 +3,7 @@ import { Card } from "antd";
 
 const Predict = () => {
   return (
-    <div style={{padding:"none"}}>
+    <div className="mainpage" style={{padding:"none"}}>
       <Card title="Chronic Kidney Disease Prediction" style={{ width: "100%", padding:"none" }}>
     <iframe
       src="http://localhost:8501"

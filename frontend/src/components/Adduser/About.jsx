@@ -70,7 +70,7 @@ const data = [
 
 const About = () => {
   return (
-    <div style={{ padding: "24px" }}>
+    <div className="mainpage" style={{ padding: "24px" }}>
       <PageHeader
         title="Chronic Kidney Disease Prediction"
         subTitle="Using Machine Learning Algorithms"
@@ -90,7 +90,7 @@ const About = () => {
           boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Title level={4}>Introduction</Title>
+        <Title level={4} className="sub-stage">Introduction</Title>
         <Paragraph>
           Chronic Kidney Disease (CKD) is a significant health concern due to its increasing prevalence. 
           This project explores the effectiveness of machine learning algorithms in CKD prediction using 
@@ -99,12 +99,6 @@ const About = () => {
       </Card>
       <Divider />
 
-      <Title level={3}>
-        <MedicineBoxOutlined /> Recommended Diet
-      </Title>
-      <Table columns={columns} dataSource={data} pagination={false} bordered />
-
-      <Divider />
 
       <Title level={4} style={{ marginBottom: "16px" }}>
         Machine Learning Algorithms
@@ -121,7 +115,7 @@ const About = () => {
             }}
           >
             <Paragraph>
-              <strong>Random Forest:</strong>
+              <strong className="sub-stage">Random Forest:</strong>
               <ul>
                 <li>Powerful algorithm used for classification and regression.</li>
                 <li>Uses multiple decision trees to improve accuracy and reduce overfitting.</li>
@@ -151,7 +145,7 @@ const About = () => {
             }}
           >
             <Paragraph>
-              <strong>XGBoost (Extreme Gradient Boosting):</strong>
+              <strong className="sub-stage">XGBoost (Extreme Gradient Boosting):</strong>
               <ul>
                 <li>Highly efficient and powerful algorithm based on gradient boosting.</li>
                 <li>Used for classification and regression due to its speed and accuracy.</li>
@@ -182,12 +176,12 @@ const About = () => {
         <Title level={4}>Our Website's Purpose</Title>
         <Paragraph>
           Our platform aims to provide accurate CKD predictions using advanced machine learning models like 
-          <strong> XGBoost</strong> and <strong>Random Forest</strong>. By analyzing crucial health indicators—such as 
+          <strong className="sub-stage"> XGBoost</strong> and <strong className="sub-stage">Random Forest</strong>. By analyzing crucial health indicators—such as 
           blood test results (creatinine, urea), urine analysis (albumin levels), and patient demographics (age, medical history)—our 
           system helps detect CKD risk in its early stages.
         </Paragraph>
         <Paragraph>
-          <strong>Our Goals:</strong>
+          <strong className="sub-stage">Our Goals:</strong>
           <ul>
             <li>Empower healthcare professionals and individuals with timely risk assessment tools.</li>
             <li>Compare the predictive accuracy of XGBoost and Random Forest models.</li>

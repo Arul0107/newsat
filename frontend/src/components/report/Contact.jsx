@@ -22,7 +22,7 @@ const Contact = () => {
   };
 
   return (
-    <div
+    <div className="mainpage"
       style={{
         minHeight: "100vh",
         display: "flex",
