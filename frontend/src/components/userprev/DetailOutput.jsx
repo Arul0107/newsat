@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Collapse, Row, Col, Image, Card, Typography, Spin } from "antd";
+import { Collapse, Row, Col, Image, Card, Typography, Spin, Modal, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 import "./DetailOutput.css";
 
 import dataImage from "../../assets/Acculer-Logo/bar.png";
@@ -15,9 +16,11 @@ const { Title, Paragraph } = Typography;
 const DetailOutput = () => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [loading, setLoading] = useState(true);
-  const images = [dataImage, random, xboost];
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const navigate = useNavigate();
+  const images = [dataImage, random, xboost]; // Include the related image
 
-  // Handle responsive sizing
   useEffect(() => {
     const handleResize = () => {
       setScreenSize(window.innerWidth);
@@ -25,7 +28,6 @@ const DetailOutput = () => {
 
     window.addEventListener('resize', handleResize);
     
-    // Simulate image loading
     const timer = setTimeout(() => {
       setLoading(false);
     }, 500);
@@ -36,31 +38,169 @@ const DetailOutput = () => {
     };
   }, []);
 
-  // Determine card size based on screen width
   const getCardSpan = () => {
-    if (screenSize < 576) return 24; // xs - full width
-    if (screenSize < 992) return 12; // sm/md - half width
-    return 8; // lg and above - one third
+    if (screenSize < 576) return 24;
+    if (screenSize < 992) return 12;
+    return 8;
   };
 
-  // Technical cards data
   const cardData = [
     {
-      src: Data,
-      title: "Dataset",
-      desc: "We used the Kaggle dataset: Chronic Kidney Disease Prediction.",
+      "src": Data,
+      "title": "Dataset",
+      "desc": "We used the Kaggle dataset: Chronic Kidney Disease Prediction.",
+      "details": "More details about the dataset...",
+      "content": {
+        "understanding_dataset": {
+          "title": "Understanding the Dataset for Chronic Kidney Disease Prediction",
+          "sections": [
+            {
+              "title": "What Kind of Dataset is Used?",
+              "description": "To predict Chronic Kidney Disease (CKD), we use a structured dataset that contains various medical parameters related to kidney function. The dataset should have patient medical reports with numerical and categorical values representing health indicators."
+            },
+            {
+              "title": "Why Use a CSV File?",
+              "description": "A CSV (Comma-Separated Values) file is the preferred format for uploading data because:",
+              "points": [
+                "It is a simple text-based format that stores data in tabular form.",
+                "It is lightweight and can be easily processed by machine learning models.",
+                "It is widely supported by data analysis tools like Python, Excel, and databases.",
+                "It ensures structured data representation with rows (records) and columns (attributes)."
+              ]
+            },
+            {
+              "title": "What Should the CSV File Contain?",
+              "description": "Your CSV file should contain patient medical records with specific columns representing health indicators."
+            },
+            {
+              "title": "How Should the CSV File Be Structured?",
+              "description": "The CSV file should be structured as follows:",
+              "points": [
+                "Each row in the file should represent a single patient's data.",
+                "Each column should be correctly labeled as mentioned above.",
+                "Missing values should be handled properly before uploading (empty values can affect predictions).",
+                "The last column, CLASS, should contain 1 (CKD Present) or 0 (No CKD) for supervised learning models."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
-      src: AccLogo,
-      title: "Accuracy",
-      desc: "Random Forest and XGBoost achieved high accuracy in CKD prediction.",
+      "src": AccLogo,
+      "title": "Accuracy in CKD Prediction",
+      "desc": "Learn about accuracy, its importance, and how to improve it.",
+      "details": "Understanding accuracy in CKD prediction is crucial for evaluating model performance.",
+      "content": {
+        "understanding_accuracy": {
+          "title": "Understanding Accuracy in CKD Prediction",
+          "sections": [
+            {
+              "title": "What is Accuracy?",
+              "description": "Accuracy is a measure of how well a machine learning model correctly predicts Chronic Kidney Disease (CKD) or No CKD. It represents the percentage of correct predictions out of the total cases tested."
+            },
+            {
+              "title": "How is Accuracy Calculated?",
+              "description": "Accuracy is calculated as the ratio of correct predictions to the total number of predictions. For example, if the model analyzes 100 patient records and correctly predicts 90, the accuracy is 90%."
+            },
+            {
+              "title": "Why is Accuracy Important?",
+              "description": "Accuracy is critical for reliable CKD detection because:",
+              "points": [
+                "It ensures reliable CKD detection.",
+                "It reduces misclassification, helping doctors make better decisions.",
+                "Higher accuracy indicates better model performance."
+              ]
+            },
+            {
+              "title": "Accuracy in Random Forest vs. XGBoost",
+              "description": "Different models have varying accuracy levels:",
+              "points": [
+                "Random Forest (RF): Works well with small to medium datasets, handling missing values effectively.",
+                "XGBoost: More advanced, improving accuracy by learning from mistakes, especially with large datasets."
+              ]
+            },
+            {
+              "title": "How to Improve Accuracy?",
+              "description": "To improve accuracy, consider the following:",
+              "points": [
+                "Use high-quality, clean, and well-structured datasets.",
+                "Perform feature engineering to select relevant features.",
+                "Tune hyperparameters for better model performance.",
+                "Use advanced algorithms like XGBoost for large datasets.",
+                "Regularly validate the model using cross-validation techniques."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
-      src: Alg,
-      title: "Algorithm Details",
-      desc: "Random Forest uses multiple decision trees. XGBoost optimizes performance.",
-    },
+      "src": Alg,
+      "title": "Algorithm",
+      "desc": "Learn about the algorithms used for CKD prediction.",
+      "details": "Details about the algorithms used in CKD prediction.",
+      "content": {
+        "understanding_algorithms": {
+          "title": "Understanding Algorithms for CKD Prediction",
+          "sections": [
+            {
+              "title": "Random Forest (RF)",
+              "description": "Random Forest is an ensemble learning method that uses multiple decision trees to improve prediction accuracy and reduce overfitting.",
+              "points": [
+                "Works well with small to medium datasets.",
+                "Handles missing values effectively.",
+                "Provides feature importance scores to identify key predictors.",
+                "Less prone to overfitting compared to individual decision trees."
+              ]
+            },
+            {
+              "title": "XGBoost",
+              "description": "XGBoost is an advanced gradient boosting algorithm that improves accuracy by learning from mistakes and optimizing performance.",
+              "points": [
+                "Ideal for large datasets with complex patterns.",
+                "Uses gradient boosting to minimize errors iteratively.",
+                "Supports parallel processing for faster training.",
+                "Provides better accuracy compared to traditional algorithms."
+              ]
+            },
+            {
+              "title": "Why Use These Algorithms?",
+              "description": "Both Random Forest and XGBoost are widely used for CKD prediction because:",
+              "points": [
+                "They handle both numerical and categorical data effectively.",
+                "They provide interpretable results, such as feature importance.",
+                "They are robust to noise and outliers in the data.",
+                "They can be fine-tuned for better performance."
+              ]
+            },
+            {
+              "title": "How to Choose the Right Algorithm?",
+              "description": "The choice of algorithm depends on the dataset and problem requirements:",
+              "points": [
+                "Use Random Forest for smaller datasets or when interpretability is important.",
+                "Use XGBoost for larger datasets or when higher accuracy is required.",
+                "Experiment with both algorithms and compare their performance."
+              ]
+            }
+          ]
+        }
+      }
+    }
   ];
+
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleRedirect = () => {
+    navigate('/prediction');
+  };
 
   return (
     <div className="app-container" style={{ padding: screenSize < 576 ? "12px" : "16px" }}>
@@ -71,7 +211,6 @@ const DetailOutput = () => {
         ]} 
         align="top"
       >
-        {/* Main Title - Only visible on small screens */}
         {screenSize < 768 && (
           <Col xs={24}>
             <Title 
@@ -87,7 +226,6 @@ const DetailOutput = () => {
           </Col>
         )}
         
-        {/* Order switches based on screen size for better mobile UX */}
         <Col 
           xs={24} 
           md={12} 
@@ -108,6 +246,7 @@ const DetailOutput = () => {
               <Col xs={getCardSpan()} key={index}>
                 <Card
                   hoverable
+                  onClick={() => handleCardClick(item)}
                   style={{
                     borderRadius: "10px",
                     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
@@ -281,9 +420,9 @@ const DetailOutput = () => {
                 </div>
               )}
             </Panel>
+           
           </Collapse>
           
-          {/* Additional note for mobile */}
           {screenSize < 576 && (
             <Paragraph 
               style={{ 
@@ -298,6 +437,44 @@ const DetailOutput = () => {
           )}
         </Col>
       </Row>
+
+      <Modal
+        title={selectedCard?.title}
+        visible={isModalVisible}
+        onCancel={handleModalClose}
+        footer={[
+          <Button key="back" onClick={handleModalClose}>
+            Close
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleRedirect}>
+            Go to Prediction
+          </Button>,
+        ]}
+        style={{ maxWidth: "100%" }}
+      >
+        <p>{selectedCard?.details}</p>
+        {selectedCard?.content && (
+          <Collapse accordion>
+            {Object.entries(selectedCard.content).map(([key, value]) => (
+              <Panel header={value.title} key={key}>
+                {value.sections.map((section, index) => (
+                  <div key={index}>
+                    <Title level={5}>{section.title}</Title>
+                    <Paragraph>{section.description}</Paragraph>
+                    {section.points && (
+                      <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
+                        {section.points.map((point, i) => (
+                          <li key={i} style={{ marginBottom: "8px" }}>{point}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </Panel>
+            ))}
+          </Collapse>
+        )}
+      </Modal>
     </div>
   );
 };

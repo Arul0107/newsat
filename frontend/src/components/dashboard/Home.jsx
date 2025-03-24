@@ -16,6 +16,7 @@ import ckd from "../../assets/Acculer-Logo/symptomsckd.png"; // Ensure this path
 import risk from "../../assets/Acculer-Logo/risk.png"; // Ensure this path is correct
 import diet from "../../assets/Acculer-Logo/dietplan.jpg"; // Ensure this path is correct
 import ckdVideo from "../../assets/Acculer-Logo/Ckd.mp4"; // Import the video
+import symp from "../../assets/Acculer-Logo/syntombody.jpg"; // Import the image
 import "./home.css";
 
 const { Title, Paragraph } = Typography;
@@ -90,44 +91,53 @@ const Home = () => {
     {
       key: "1",
       category: "Proteins",
-      recommended: "Skinless poultry, fish, egg whites, tofu, lentils (in moderation)",
-      avoid: "Red meat, processed meats (bacon, sausages), organ meats, high-protein diets",
+      recommended:
+        "Skinless poultry, fish, egg whites, tofu, lentils (in moderation)",
+      avoid:
+        "Red meat, processed meats (bacon, sausages), organ meats, high-protein diets",
     },
     {
       key: "2",
       category: "Fruits",
-      recommended: "Apples, berries, grapes, pineapple, pears, cherries, watermelon",
+      recommended:
+        "Apples, berries, grapes, pineapple, pears, cherries, watermelon",
       avoid: "Bananas, oranges, avocados, kiwi, dried fruits (high potassium)",
     },
     {
       key: "3",
       category: "Vegetables",
-      recommended: "Cabbage, cauliflower, bell peppers, onions, carrots, cucumbers",
+      recommended:
+        "Cabbage, cauliflower, bell peppers, onions, carrots, cucumbers",
       avoid: "Potatoes, tomatoes, spinach, mushrooms, pumpkin (high potassium)",
     },
     {
       key: "4",
       category: "Grains",
       recommended: "White rice, pasta, bread, oats, cornflakes, barley",
-      avoid: "Whole wheat bread, brown rice, quinoa, bran cereals (high phosphorus)",
+      avoid:
+        "Whole wheat bread, brown rice, quinoa, bran cereals (high phosphorus)",
     },
     {
       key: "5",
       category: "Dairy",
-      recommended: "Unsalted butter, small amounts of milk, rice or almond milk",
-      avoid: "Cheese, yogurt, full-fat dairy, ice cream (high phosphorus and potassium)",
+      recommended:
+        "Unsalted butter, small amounts of milk, rice or almond milk",
+      avoid:
+        "Cheese, yogurt, full-fat dairy, ice cream (high phosphorus and potassium)",
     },
     {
       key: "6",
       category: "Beverages",
       recommended: "Water, herbal teas, cranberry juice, lemon water",
-      avoid: "Soda, coffee, alcohol, energy drinks, high-phosphorus drinks (colas, chocolate milk)",
+      avoid:
+        "Soda, coffee, alcohol, energy drinks, high-phosphorus drinks (colas, chocolate milk)",
     },
     {
       key: "7",
       category: "Sweeteners",
       recommended: "Honey, maple syrup, jam (in moderation)",
-      avoid: "Artificial sweeteners, high-sugar foods, molasses (high potassium)",
+      avoid:
+        "Artificial sweeteners, high-sugar foods, molasses (high potassium)",
     },
   ];
 
@@ -181,82 +191,59 @@ const Home = () => {
                     "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
                 }}
               >
-                <Title className="title">Chronic Kidney Disease (CKD)</Title>
-
-                <Paragraph style={{ fontSize: "14px" }}>
-                  <strong className="sub-stage">Overview:</strong>
-                  <ul style={{ paddingLeft: "20px", margin: "8px 0" }}>
-                    <li>
-                      CKD is a long-term, progressive condition where kidneys
-                      gradually lose function.
-                    </li>
-                    <li>
-                      Key kidney functions:
-                      <ul style={{ paddingLeft: "20px", margin: "4px 0" }}>
-                        <li>
-                          Filtering waste, excess fluids, and toxins from the
-                          bloodstream.
-                        </li>
-                        <li>Maintaining electrolyte balance.</li>
-                        <li>Regulating blood pressure.</li>
-                        <li>
-                          Producing hormones for red blood cell production.
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      Progresses silently over years, with mild or no symptoms
-                      in early stages.
-                    </li>
-                    <li>
-                      Early detection is difficult but crucial for management.
-                    </li>
-                  </ul>
+                <h1 className="sub-stage">Chronic Kidney Disease (CKD)</h1>
+                <Paragraph style={{ fontSize: "14px", textAlign: "justify" }}>
+                  Chronic Kidney Disease (CKD) is a long-term condition that
+                  develops gradually, often without noticeable symptoms in the
+                  early stages. It occurs when the kidneys lose their ability to
+                  filter waste, excess fluids, and toxins from the blood,
+                  leading to an accumulation of harmful substances in the body.
+                  This decline in kidney function is usually caused by
+                  conditions such as diabetes, high blood pressure, infections,
+                  or autoimmune diseases. Over time, the tiny filtering units in
+                  the kidneys, called nephrons, become damaged. At first, the
+                  healthy nephrons work overtime to compensate for the damaged
+                  ones, but this extra strain eventually causes further
+                  deterioration, making it harder for the kidneys to do their
+                  job. The progression of CKD can take years or even decades,
+                  depending on factors like genetics, lifestyle, and how well
+                  the underlying causes are managed. Since the kidneys play a
+                  crucial role in regulating blood pressure, producing hormones,
+                  and maintaining the balance of essential minerals, their
+                  failure can lead to serious complications. Without proper
+                  management, CKD increases the risk of heart disease, weakens
+                  bones, causes anemia (low red blood cell count), and leads to
+                  fluid retention, which can result in swelling in the legs and
+                  lungs. Additionally, as kidney function declines, toxins build
+                  up in the blood, affecting brain function and causing fatigue,
+                  confusion, and difficulty concentrating. Diagnosing CKD
+                  involves routine blood and urine tests to check the estimated
+                  Glomerular Filtration Rate (eGFR) and protein levels in urine
+                  (albuminuria), which indicate how well the kidneys are
+                  working.
+                  <br />
+                  <br />
+                  While CKD is irreversible, its progression can be slowed
+                  through proper medical care and lifestyle changes. Controlling
+                  blood pressure and blood sugar levels, maintaining a healthy
+                  diet low in salt and processed foods, staying hydrated, and
+                  avoiding excessive use of painkillers or other kidney-damaging
+                  medications can help preserve kidney function. Recent
+                  advancements in medical technology, particularly artificial
+                  intelligence and machine learning, have made it possible to
+                  predict CKD earlier and with greater accuracy. AI-driven
+                  diagnostic tools analyze patient data to detect patterns and
+                  risk factors, allowing for early intervention before
+                  significant kidney damage occurs. Researchers are also
+                  exploring new treatments, including regenerative medicine and
+                  targeted therapies, to slow down or even halt the progression
+                  of CKD. As healthcare continues to evolve, the hope is that
+                  early detection and better treatment options will improve the
+                  quality of life for those affected by this condition, reducing
+                  the need for dialysis or kidney transplants in the long run.
                 </Paragraph>
 
-                <Paragraph style={{ fontSize: "14px" }}>
-                  <strong className="sub-stage">Progression & Stages:</strong>
-                  <ul style={{ paddingLeft: "20px", margin: "8px 0" }}>
-                    <li>
-                      Progression depends on factors like lifestyle, genetics,
-                      and medical management.
-                    </li>
-                    <li>
-                      Common causes include diabetes, hypertension, chronic
-                      infections, and genetic disorders.
-                    </li>
-                    <li>
-                      CKD is classified into five stages based on Glomerular
-                      Filtration Rate (GFR):
-                      <ul style={{ paddingLeft: "20px", margin: "4px 0" }}>
-                        <li>
-                          <strong className="sub-stage">Stage 1 & 2:</strong>{" "}
-                          Minimal functional loss.
-                        </li>
-                        <li>
-                          <strong className="sub-stage">Stage 3:</strong>{" "}
-                          Moderate impairment with symptoms.
-                        </li>
-                        <li>
-                          <strong className="sub-stage">Stage 4:</strong> Severe
-                          kidney function loss.
-                        </li>
-                        <li>
-                          <strong className="sub-stage">Stage 5 (ESRD):</strong>{" "}
-                          End-stage requiring dialysis or transplant.
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </Paragraph>
-
-                <Title
-                  className="title"
-                  level={3}
-                  style={{ fontSize: "20px", margin: "24px 0 12px 0" }}
-                >
-                  CKD Symptoms
-                </Title>
+                <h1 className="sub-stage">CKD Symptoms</h1>
                 <Paragraph style={{ fontSize: "14px" }}>
                   Many CKD patients remain asymptomatic and are often diagnosed
                   incidentally through routine medical exams. However, as CKD
@@ -275,43 +262,35 @@ const Home = () => {
                   Common symptoms of CKD include:
                   <ul style={{ paddingLeft: "20px", margin: "8px 0" }}>
                     <li>
-                      <strong className="sub-stage">Pallor:</strong> An
-                      unhealthy pale appearance, often due to anemia.
+                      <strong>Pallor:</strong> An unhealthy pale appearance,
+                      often due to anemia.
                     </li>
                     <li>
-                      <strong className="sub-stage">
-                        Shortness of breath:
-                      </strong>{" "}
-                      Caused by fluid retention, anemia, or heart issues.
+                      <strong>Shortness of breath:</strong> Caused by fluid
+                      retention, anemia, or heart issues.
                     </li>
                     <li>
-                      <strong className="sub-stage">Itching:</strong> Resulting
-                      from toxin buildup and immune system disturbances.
+                      <strong>Itching:</strong> Resulting from toxin buildup and
+                      immune system disturbances.
                     </li>
                     <li>
-                      <strong className="sub-stage">Muscle cramps:</strong>{" "}
-                      Often occurring at night due to biochemical imbalances.
+                      <strong>Muscle cramps:</strong> Often occurring at night
+                      due to biochemical imbalances.
                     </li>
                     <li>
-                      <strong className="sub-stage">
-                        Cognitive impairment:
-                      </strong>{" "}
-                      Affecting memory, attention, and language skills.
+                      <strong>Cognitive impairment:</strong> Affecting memory,
+                      attention, and language skills.
                     </li>
                     <li>
-                      <strong className="sub-stage">
-                        Gastrointestinal symptoms:
-                      </strong>{" "}
-                      Includes loss of appetite, vomiting, and taste changes.
+                      <strong>Gastrointestinal symptoms:</strong> Includes loss
+                      of appetite, vomiting, and taste changes.
                     </li>
                     <li>
-                      <strong className="sub-stage">Uraemic breath:</strong> A
-                      noticeable odor caused by urea breakdown in saliva.
+                      <strong>Uraemic breath:</strong> A noticeable odor caused
+                      by urea breakdown in saliva.
                     </li>
                     <li>
-                      <strong className="sub-stage">
-                        Changes in urine output:
-                      </strong>
+                      <strong>Changes in urine output:</strong>
                       <ul style={{ paddingLeft: "20px", margin: "4px 0" }}>
                         <li>
                           Polyuria: Increased urination due to impaired
@@ -324,34 +303,23 @@ const Home = () => {
                       </ul>
                     </li>
                     <li>
-                      <strong className="sub-stage">Peripheral edema:</strong>{" "}
-                      Swelling in the legs or hands due to fluid retention.
+                      <strong>Peripheral edema:</strong> Swelling in the legs or
+                      hands due to fluid retention.
                     </li>
                   </ul>
-                </Paragraph>
-
-                <Title
-                  className="title"
-                  level={3}
-                  style={{ fontSize: "20px", margin: "24px 0 12px 0" }}
-                >
-                  Chronic Kidney Disease (CKD) Definition
-                </Title>
-                <Paragraph style={{ fontSize: "14px" }}>
-                  <strong className="sub-stage">Meaning:</strong> CKD, also
-                  known as Chronic Renal Failure, is a progressive and
-                  irreversible deterioration of kidney function. The kidneys
-                  gradually lose their ability to filter blood, leading to waste
-                  buildup, which can cause severe health problems and eventually
-                  lead to kidney failure.
                 </Paragraph>
 
                 <Title level={3}>
                   <MedicineBoxOutlined /> Recommended Diet
                 </Title>
-                <Table columns={columns} dataSource={data} pagination={false} bordered />
+                <Table
+                  columns={columns}
+                  dataSource={data}
+                  pagination={false}
+                  bordered
+                />
                 <Paragraph style={{ fontSize: "14px" }}>
-                  <strong className="sub-stage">Stages of CKD:</strong>
+                  <strong>Stages of CKD:</strong>
                 </Paragraph>
 
                 <div style={{ overflowX: "auto", width: "100%" }}>
@@ -427,7 +395,7 @@ const Home = () => {
                     1. Chronic Nonrenal (Systemic) Diseases
                   </Title>
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">
+                    <strong>
                       Diabetes, Hypertension, and Metabolic Syndrome
                     </strong>
                     <br />
@@ -436,18 +404,14 @@ const Home = () => {
                   </Paragraph>
 
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">
-                      Autoimmune and Autoinflammatory Diseases
-                    </strong>
+                    <strong>Autoimmune and Autoinflammatory Diseases</strong>
                     <br />
                     CKD can develop due to immune responses that target the
                     kidneys.
                   </Paragraph>
 
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">
-                      Infections (e.g., HIV, HBV, HCV)
-                    </strong>
+                    <strong>Infections (e.g., HIV, HBV, HCV)</strong>
                     <ul style={{ paddingLeft: "20px", margin: "4px 0" }}>
                       <li>Direct infection of renal parenchyma.</li>
                       <li>Kidney complications due to liver disease.</li>
@@ -457,7 +421,7 @@ const Home = () => {
                   </Paragraph>
 
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">Nephrotoxic Exposure</strong>
+                    <strong>Nephrotoxic Exposure</strong>
                     <br />
                     Certain chemotherapy drugs and other nephrotoxic agents can
                     lead to CKD with long-term use.
@@ -471,7 +435,7 @@ const Home = () => {
                     2. Demographic and Genetic Factors
                   </Title>
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">Age and Gender</strong>
+                    <strong>Age and Gender</strong>
                     <br />
                     CKD is more prevalent in women, but men are more likely to
                     require kidney replacement therapy.
@@ -481,9 +445,7 @@ const Home = () => {
                   </Paragraph>
 
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">
-                      Family History and Genetics
-                    </strong>
+                    <strong>Family History and Genetics</strong>
                     <br />
                     DNA sequence variations at specific genetic loci have been
                     linked to CKD predisposition.
@@ -497,16 +459,14 @@ const Home = () => {
                     3. Childhood and Adolescent Risk Factors
                   </Title>
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">Premature Birth</strong>
+                    <strong>Premature Birth</strong>
                     <br />
                     Premature infants have fewer nephrons and are more
                     vulnerable to CKD due to postnatal nephrotoxin exposure.
                   </Paragraph>
 
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">
-                      Treated Childhood Cancer
-                    </strong>
+                    <strong>Treated Childhood Cancer</strong>
                     <br />
                     Survivors of childhood cancer have an increased risk of
                     developing CKD, though the reasons are not fully understood.
@@ -520,16 +480,14 @@ const Home = () => {
                     4. Lifestyle and Behavioral Factors
                   </Title>
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">
-                      Smoking and Alcohol Consumption
-                    </strong>
+                    <strong>Smoking and Alcohol Consumption</strong>
                     <br />
                     Increase the risk of hypertension, metabolic diseases, and
                     CKD.
                   </Paragraph>
 
                   <Paragraph style={{ fontSize: "14px", margin: "4px 0" }}>
-                    <strong className="sub-stage">Low Physical Activity</strong>
+                    <strong>Low Physical Activity</strong>
                     <br />
                     Can lead to obesity, high BMI, and increased risk of CKD.
                   </Paragraph>
@@ -547,48 +505,19 @@ const Home = () => {
               }}
             >
               <Row gutter={[16, 16]}>
-                <Col xs={24} sm={12}>
-                  <img
-                    src={kd2}
-                    alt="Kidney Disease"
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      maxHeight: "300px",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                      boxShadow:
-                        "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-                    }}
-                  />
-                </Col>
-                <Col xs={24} sm={12}>
-                  <img
-                    src={kd1}
-                    alt="Kidney Disease"
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      maxHeight: "300px",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                      boxShadow:
-                        "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-                    }}
-                  />
-                </Col>
                 <Col xs={24}>
                   <Card
                     style={{
                       borderRadius: "10px",
                       overflow: "hidden",
+                      objectFit: "cover ",
                       boxShadow:
                         "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
                     }}
                   >
                     <video
                       width="100%"
-                      height="250px"
+                      height="450px"
                       controls
                       style={{ borderRadius: "10px" }}
                     >
@@ -596,10 +525,8 @@ const Home = () => {
                       Your browser does not support the video tag.
                     </video>
                   </Card>
-                </Col>
-                <Col xs={24}>
                   <img
-                    src={risk}
+                    src={symp}
                     alt="Kidney Disease Risk Factors"
                     style={{
                       width: "100%",
@@ -627,6 +554,54 @@ const Home = () => {
                     }}
                   />
                 </Col>
+                <Col xs={24}>
+                  <Card
+                    style={{
+                      borderRadius: "10px",
+                      overflow: "hidden",
+                      boxShadow:
+                        "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+                    }}
+                  >
+                    <img
+                      src={kd2}
+                      alt="Kidney Disease Risk Factors"
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        maxHeight: "700px",
+                        objectFit: "contain",
+                        borderRadius: "10px",
+                        boxShadow:
+                          "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+                      }}
+                    />
+                  </Card>
+                </Col>
+                <Col xs={24}>
+                  <Card
+                    style={{
+                      borderRadius: "10px",
+                      overflow: "hidden",
+                      boxShadow:
+                        "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+                    }}
+                  >
+                    <img
+                      src={risk}
+                      alt="Kidney Disease Risk Factors"
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        maxHeight: "700px",
+                        objectFit: "contain",
+                        borderRadius: "10px",
+                        boxShadow:
+                          "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+                      }}
+                    />
+                  </Card>
+                </Col>
               </Row>
             </Col>
           </Row>
@@ -650,7 +625,8 @@ const Home = () => {
                   width: "100%",
                   height: "auto",
                   borderRadius: "8px",
-                  boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+                  boxShadow:
+                    "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
                 }}
               />
             </Col>
@@ -662,7 +638,8 @@ const Home = () => {
                   width: "100%",
                   height: "auto",
                   borderRadius: "8px",
-                  boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+                  boxShadow:
+                    "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
                 }}
               />
             </Col>
@@ -688,7 +665,8 @@ const Home = () => {
                     width: "100%",
                     height: "auto",
                     borderRadius: "8px",
-                    boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+                    boxShadow:
+                      "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
                   }}
                 />
               </Col>

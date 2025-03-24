@@ -66,8 +66,8 @@ if data_file is not None:
     X_train_selected = scaler.fit_transform(X_train_selected)
     X_test_selected = scaler.transform(X_test_selected)
 
-    # Train models
-    rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+    # Train models with fewer trees in Random Forest
+    rf_model = RandomForestClassifier(n_estimators=30, random_state=30)  # Reduced to 30 trees
     rf_model.fit(X_train_selected, y_train)
     xgb_model = xgb.XGBClassifier(n_estimators=100, use_label_encoder=False, eval_metric='logloss', random_state=42)
     xgb_model.fit(X_train_selected, y_train)
@@ -80,21 +80,62 @@ if data_file is not None:
     rf_accuracy = accuracy_score(y_test, rf_predictions)
     xgb_accuracy = accuracy_score(y_test, xgb_predictions)
 
-    # Display accuracy comparison
-    st.write("### Model Accuracy Comparison")
-    fig, ax = plt.subplots()
-    ax.bar(["Random Forest", "XGBoost"], [rf_accuracy, xgb_accuracy], color=['blue', 'red'])
-    ax.set_ylabel("Accuracy")
-    ax.set_title("Model Accuracy Comparison")
+    # Display accuracies
+    st.write("### Model Accuracies")
+    st.write(f"**Random Forest Accuracy:** {rf_accuracy:.2f}")
+    st.write(f"**XGBoost Accuracy:** {xgb_accuracy:.2f}")
+
+    # Confusion Matrix Visualization
+    st.write("### Confusion Matrix")
+
+    # Random Forest Confusion Matrix
+    st.write("#### Random Forest Confusion Matrix")
+    rf_cm = confusion_matrix(y_test, rf_predictions)
+    fig, ax = plt.subplots(figsize=(6, 4))
+    sns.heatmap(rf_cm, annot=True, fmt='d', cmap='Blues', ax=ax)
+    ax.set_xlabel('Predicted')
+    ax.set_ylabel('Actual')
+    ax.set_title('Random Forest Confusion Matrix')
     st.pyplot(fig)
 
-    # Confusion Matrices
-    st.write("### Confusion Matrices")
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-    sns.heatmap(confusion_matrix(y_test, rf_predictions), annot=True, fmt='d', cmap='Blues', ax=axes[0])
-    axes[0].set_title("Random Forest Confusion Matrix")
-    sns.heatmap(confusion_matrix(y_test, xgb_predictions), annot=True, fmt='d', cmap='Reds', ax=axes[1])
-    axes[1].set_title("XGBoost Confusion Matrix")
+    # XGBoost Confusion Matrix
+    st.write("#### XGBoost Confusion Matrix")
+    xgb_cm = confusion_matrix(y_test, xgb_predictions)
+    fig, ax = plt.subplots(figsize=(6, 4))
+    sns.heatmap(xgb_cm, annot=True, fmt='d', cmap='Reds', ax=ax)
+    ax.set_xlabel('Predicted')
+    ax.set_ylabel('Actual')
+    ax.set_title('XGBoost Confusion Matrix')
+    st.pyplot(fig)
+
+    # Add a section to display the chart counts from the images
+    st.write("### Chart Counts from Images")
+
+    # Updated counts for Random Forest and XGBoost based on the image
+    st.write("**Random Forest Counts:**")
+    rf_counts = [69, 2, 0, 7, 42]  # Updated counts for Random Forest
+    st.write(rf_counts)
+
+    st.write("**XGBoost Counts:**")
+    xgb_counts = [70, 60, 50, 40, 30, 20, 10, 0]  # Updated counts for XGBoost
+    st.write(xgb_counts)
+
+    # Visualize the updated counts using a bar plot
+    st.write("### Visualization of Counts")
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Plot Random Forest counts
+    ax.bar(np.arange(len(rf_counts)) - 0.2, rf_counts, width=0.4, color='blue', label='Random Forest')
+
+    # Plot XGBoost counts
+    ax.bar(np.arange(len(xgb_counts)) + 0.2, xgb_counts, width=0.4, color='red', label='XGBoost', alpha=0.7)
+
+    # Customize the plot
+    ax.set_xticks(np.arange(max(len(rf_counts), len(xgb_counts))))
+    ax.set_xlabel("Index")
+    ax.set_ylabel("Counts")
+    ax.set_title("Random Forest vs XGBoost Counts")
+    ax.legend()
     st.pyplot(fig)
 
     # Model selection for prediction
@@ -117,8 +158,12 @@ if data_file is not None:
         individual_df = individual_df[selected_features]
         individual_df = scaler.transform(individual_df)
         prediction = rf_model.predict(individual_df)[0] if model_choice == "Random Forest" else xgb_model.predict(individual_df)[0]
-        st.write("### Individual Prediction Result")
-        st.write("CKD" if prediction == 1 else "No CKD")
+        
+        # Display prediction result in a pop-up dark
+        with st.popover("Prediction Result"):
+            st.write("### Individual Prediction Result")
+            st.write(f"**Prediction:** {'CKD' if prediction == 1 else 'No CKD'}")
+            st.write("**Model Used:**", model_choice)
 
     # Predict CKD for all records
     st.write("### Predict CKD for All Records")

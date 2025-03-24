@@ -21,3 +21,13 @@
 .ant-steps-item-description {
   font-size: 14px;
 }
+.ant-collapse-content-box ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.ant-collapse-content-box li {
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 14px;
+}

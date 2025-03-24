@@ -98,7 +98,36 @@ const About = () => {
         </Paragraph>
       </Card>
       <Divider />
-
+      <Card
+        style={{
+          marginBottom: "24px",
+          background: "white",
+          borderRadius: "10px",
+          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Title level={4}>Our Website's Purpose</Title>
+        <Paragraph>
+          Our platform aims to provide accurate CKD predictions using advanced machine learning models like 
+          <strong className="sub-stage"> XGBoost</strong> and <strong className="sub-stage">Random Forest</strong>. By analyzing crucial health indicators—such as 
+          blood test results (creatinine, urea), urine analysis (albumin levels), and patient demographics (age, medical history)—our 
+          system helps detect CKD risk in its early stages.
+        </Paragraph>
+        <Paragraph>
+          <strong className="sub-stage">Our Goals:</strong>
+          <ul>
+            <li>Empower healthcare professionals and individuals with timely risk assessment tools.</li>
+            <li>Compare the predictive accuracy of XGBoost and Random Forest models.</li>
+            <li>Raise awareness about CKD causes, symptoms, and prevention strategies.</li>
+            <li>Ensure user-friendly access to our findings and facilitate potential scalability for mobile apps or clinical software.</li>
+            <li>Contribute to research by sharing our methodology and results to support innovation in predictive healthcare.</li>
+          </ul>
+        </Paragraph>
+        <Paragraph>
+          By integrating cutting-edge technology with accessible healthcare solutions, we strive to mitigate the global burden of CKD.
+        </Paragraph>
+      </Card>
+      <Divider />
 
       <Title level={4} style={{ marginBottom: "16px" }}>
         Machine Learning Algorithms
@@ -165,36 +194,7 @@ const About = () => {
           </Card>
           
         </Col>
-        <Card
-        style={{
-          marginBottom: "24px",
-          background: "white",
-          borderRadius: "10px",
-          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Title level={4}>Our Website's Purpose</Title>
-        <Paragraph>
-          Our platform aims to provide accurate CKD predictions using advanced machine learning models like 
-          <strong className="sub-stage"> XGBoost</strong> and <strong className="sub-stage">Random Forest</strong>. By analyzing crucial health indicators—such as 
-          blood test results (creatinine, urea), urine analysis (albumin levels), and patient demographics (age, medical history)—our 
-          system helps detect CKD risk in its early stages.
-        </Paragraph>
-        <Paragraph>
-          <strong className="sub-stage">Our Goals:</strong>
-          <ul>
-            <li>Empower healthcare professionals and individuals with timely risk assessment tools.</li>
-            <li>Compare the predictive accuracy of XGBoost and Random Forest models.</li>
-            <li>Raise awareness about CKD causes, symptoms, and prevention strategies.</li>
-            <li>Ensure user-friendly access to our findings and facilitate potential scalability for mobile apps or clinical software.</li>
-            <li>Contribute to research by sharing our methodology and results to support innovation in predictive healthcare.</li>
-          </ul>
-        </Paragraph>
-        <Paragraph>
-          By integrating cutting-edge technology with accessible healthcare solutions, we strive to mitigate the global burden of CKD.
-        </Paragraph>
-      </Card>
-      <Divider />
+
       </Row>
 
       
