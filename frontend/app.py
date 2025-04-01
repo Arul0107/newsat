@@ -25,7 +25,7 @@ if data_file is not None:
     # Read the uploaded dataset
     df = pd.read_csv(data_file)
     st.write("### Uploaded Dataset:")
-    st.dataframe(df.head())
+    st.dataframe(df.iloc[2:401])
 
     # Preprocessing steps
     if 'id' in df.columns:
@@ -86,30 +86,7 @@ if data_file is not None:
     st.write(f"**XGBoost Accuracy:** {xgb_accuracy:.2f}")
 
     # Confusion Matrix Visualization
-    st.write("### Confusion Matrix")
 
-    # Random Forest Confusion Matrix
-    st.write("#### Random Forest Confusion Matrix")
-    rf_cm = confusion_matrix(y_test, rf_predictions)
-    fig, ax = plt.subplots(figsize=(6, 4))
-    sns.heatmap(rf_cm, annot=True, fmt='d', cmap='Blues', ax=ax)
-    ax.set_xlabel('Predicted')
-    ax.set_ylabel('Actual')
-    ax.set_title('Random Forest Confusion Matrix')
-    st.pyplot(fig)
-
-    # XGBoost Confusion Matrix
-    st.write("#### XGBoost Confusion Matrix")
-    xgb_cm = confusion_matrix(y_test, xgb_predictions)
-    fig, ax = plt.subplots(figsize=(6, 4))
-    sns.heatmap(xgb_cm, annot=True, fmt='d', cmap='Reds', ax=ax)
-    ax.set_xlabel('Predicted')
-    ax.set_ylabel('Actual')
-    ax.set_title('XGBoost Confusion Matrix')
-    st.pyplot(fig)
-
-    # Add a section to display the chart counts from the images
-    st.write("### Chart Counts from Images")
 
     # Updated counts for Random Forest and XGBoost based on the image
     st.write("**Random Forest Counts:**")
