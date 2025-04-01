@@ -19,7 +19,7 @@ const DetailOutput = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const navigate = useNavigate();
-  const images = [dataImage, random, xboost]; // Include the related image
+  const images = [dataImage, random, xboost];
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,7 +27,7 @@ const DetailOutput = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    
+
     const timer = setTimeout(() => {
       setLoading(false);
     }, 500);
@@ -204,39 +204,39 @@ const DetailOutput = () => {
 
   return (
     <div className="app-container" style={{ padding: screenSize < 576 ? "12px" : "16px" }}>
-      <Row 
+      <Row
         gutter={[
-          screenSize < 576 ? 8 : 16, 
+          screenSize < 576 ? 8 : 16,
           screenSize < 576 ? 8 : 16
-        ]} 
+        ]}
         align="top"
       >
         {screenSize < 768 && (
           <Col xs={24}>
-            <Title 
-              level={3} 
-              style={{ 
-                textAlign: "center", 
+            <Title
+              level={3}
+              style={{
+                textAlign: "center",
                 margin: "0 0 16px 0",
-                fontSize: screenSize < 576 ? "20px" : "24px" 
+                fontSize: screenSize < 576 ? "20px" : "24px"
               }}
             >
               CKD Prediction Technical Details
             </Title>
           </Col>
         )}
-        
-        <Col 
-          xs={24} 
-          md={12} 
+
+        <Col
+          xs={24}
+          md={12}
           order={screenSize < 768 ? 2 : 1}
           style={{ marginBottom: screenSize < 768 ? "16px" : 0 }}
         >
-          <Title 
-            level={4} 
-            style={{ 
+          <Title
+            level={4}
+            style={{
               marginBottom: "16px",
-              fontSize: screenSize < 576 ? "18px" : "20px" 
+              fontSize: screenSize < 576 ? "18px" : "20px"
             }}
           >
             Technical Details
@@ -256,37 +256,37 @@ const DetailOutput = () => {
                     flexDirection: "column",
                     justifyContent: "space-between"
                   }}
-                  bodyStyle={{ 
+                  bodyStyle={{
                     padding: screenSize < 576 ? "12px" : "24px",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center", 
-                    height: "100%" 
+                    alignItems: "center",
+                    height: "100%"
                   }}
                 >
                   <div style={{ marginBottom: "10px" }}>
                     <img
                       src={item.src}
                       alt={item.title}
-                      style={{ 
-                        width: screenSize < 576 ? "60px" : "80px", 
-                        height: screenSize < 576 ? "60px" : "80px", 
+                      style={{
+                        width: screenSize < 576 ? "60px" : "80px",
+                        height: screenSize < 576 ? "60px" : "80px",
                         objectFit: "contain"
                       }}
                     />
                   </div>
                   <div>
-                    <Title 
-                      level={4} 
-                      style={{ 
+                    <Title
+                      level={4}
+                      style={{
                         fontSize: screenSize < 576 ? "16px" : "18px",
-                        margin: "8px 0" 
+                        margin: "8px 0"
                       }}
                     >
                       {item.title}
                     </Title>
                     <Paragraph
-                      style={{ 
+                      style={{
                         fontSize: screenSize < 576 ? "12px" : "14px",
                         margin: 0
                       }}
@@ -300,55 +300,55 @@ const DetailOutput = () => {
           </Row>
         </Col>
 
-        <Col 
-          xs={24} 
-          md={12} 
+        <Col
+          xs={24}
+          md={12}
           order={screenSize < 768 ? 1 : 2}
           style={{ marginBottom: screenSize < 768 ? "16px" : 0 }}
         >
-          <Title 
-            level={4} 
-            style={{ 
+          <Title
+            level={4}
+            style={{
               marginBottom: "16px",
-              fontSize: screenSize < 576 ? "18px" : "20px" 
+              fontSize: screenSize < 576 ? "18px" : "20px"
             }}
           >
             Model Performance Analysis
           </Title>
-          <Collapse 
-            accordion 
+          <Collapse
+            accordion
             defaultActiveKey={["0"]}
-            style={{ 
-              borderRadius: "10px", 
+            style={{
+              borderRadius: "10px",
               overflow: "hidden",
               boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
             }}
           >
-            <Panel 
+            <Panel
               header={
                 <span style={{ fontSize: screenSize < 576 ? "14px" : "16px" }}>
                   Model Accuracy Comparison
                 </span>
-              } 
+              }
               key="0"
             >
               {loading ? (
-                <div style={{ 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "20px" 
+                <div style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  padding: "20px"
                 }}>
                   <Spin tip="Loading image..." />
                 </div>
               ) : (
                 <div style={{ textAlign: "center" }}>
-                  <Image 
-                    src={images[0]} 
-                    alt="Model Accuracy Comparison" 
-                    className="accordion-image" 
+                  <Image
+                    src={images[0]}
+                    alt="Model Accuracy Comparison"
+                    className="accordion-image"
                     preview={true}
-                    style={{ 
-                      maxWidth: "100%", 
+                    style={{
+                      maxWidth: "100%",
                       height: "auto",
                       objectFit: "contain"
                     }}
@@ -356,31 +356,31 @@ const DetailOutput = () => {
                 </div>
               )}
             </Panel>
-            <Panel 
+            <Panel
               header={
                 <span style={{ fontSize: screenSize < 576 ? "14px" : "16px" }}>
                   Random Forest Confusion Matrix
                 </span>
-              } 
+              }
               key="1"
             >
               {loading ? (
-                <div style={{ 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "20px" 
+                <div style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  padding: "20px"
                 }}>
                   <Spin tip="Loading image..." />
                 </div>
               ) : (
                 <div style={{ textAlign: "center" }}>
-                  <Image 
-                    src={images[1]} 
-                    alt="Random Forest Confusion Matrix" 
-                    className="accordion-image" 
+                  <Image
+                    src={images[1]}
+                    alt="Random Forest Confusion Matrix"
+                    className="accordion-image"
                     preview={true}
-                    style={{ 
-                      maxWidth: "100%", 
+                    style={{
+                      maxWidth: "100%",
                       height: "auto",
                       objectFit: "contain"
                     }}
@@ -388,31 +388,31 @@ const DetailOutput = () => {
                 </div>
               )}
             </Panel>
-            <Panel 
+            <Panel
               header={
                 <span style={{ fontSize: screenSize < 576 ? "14px" : "16px" }}>
                   XGBoost Confusion Matrix
                 </span>
-              } 
+              }
               key="2"
             >
               {loading ? (
-                <div style={{ 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "20px" 
+                <div style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  padding: "20px"
                 }}>
                   <Spin tip="Loading image..." />
                 </div>
               ) : (
                 <div style={{ textAlign: "center" }}>
-                  <Image 
-                    src={images[2]} 
-                    alt="XGBoost Confusion Matrix" 
-                    className="accordion-image" 
+                  <Image
+                    src={images[2]}
+                    alt="XGBoost Confusion Matrix"
+                    className="accordion-image"
                     preview={true}
-                    style={{ 
-                      maxWidth: "100%", 
+                    style={{
+                      maxWidth: "100%",
                       height: "auto",
                       objectFit: "contain"
                     }}
@@ -420,16 +420,16 @@ const DetailOutput = () => {
                 </div>
               )}
             </Panel>
-           
+
           </Collapse>
-          
+
           {screenSize < 576 && (
-            <Paragraph 
-              style={{ 
-                fontSize: "12px", 
-                textAlign: "center", 
-                marginTop: "8px", 
-                color: "#666" 
+            <Paragraph
+              style={{
+                fontSize: "12px",
+                textAlign: "center",
+                marginTop: "8px",
+                color: "#666"
               }}
             >
               Tap on images to enlarge for better viewing

@@ -10,13 +10,13 @@ import {
   Drawer,
 } from "antd";
 import { MedicineBoxOutlined } from "@ant-design/icons";
-import kd1 from "../../assets/Acculer-Logo/kd1.png"; // Ensure this path is correct
-import kd2 from "../../assets/Acculer-Logo/kd2.png"; // Ensure this path is correct
-import ckd from "../../assets/Acculer-Logo/symptomsckd.png"; // Ensure this path is correct
-import risk from "../../assets/Acculer-Logo/risk.png"; // Ensure this path is correct
-import diet from "../../assets/Acculer-Logo/dietplan.jpg"; // Ensure this path is correct
-import ckdVideo from "../../assets/Acculer-Logo/Ckd.mp4"; // Import the video
-import symp from "../../assets/Acculer-Logo/syntombody.jpg"; // Import the image
+import kd1 from "../../assets/Acculer-Logo/kd1.png"; 
+import kd2 from "../../assets/Acculer-Logo/kd2.png"; 
+import ckd from "../../assets/Acculer-Logo/symptomsckd.png"; 
+import risk from "../../assets/Acculer-Logo/risk.png"; 
+import diet from "../../assets/Acculer-Logo/dietplan.jpg"; 
+import ckdVideo from "../../assets/Acculer-Logo/Ckd.mp4"; 
+import symp from "../../assets/Acculer-Logo/syntombody.jpg"; 
 import "./home.css";
 
 const { Title, Paragraph } = Typography;
@@ -34,7 +34,7 @@ const ckdStages = [
 const Home = () => {
   const [visible, setVisible] = useState(false);
 
-  // Responsive table columns
+  
   const getColumns = () => {
     const isMobile = window.innerWidth < 768;
 
@@ -170,8 +170,7 @@ const Home = () => {
               marginLeft: "auto",
             }}
           >
-            Menu
-          </Button>
+Images          </Button>
         </Header>
 
         <Content>
@@ -309,7 +308,7 @@ const Home = () => {
                   </ul>
                 </Paragraph>
 
-                <Title level={3}>
+                <Title level={3} className="sub-stage">
                   <MedicineBoxOutlined /> Recommended Diet
                 </Title>
                 <Table
@@ -319,7 +318,7 @@ const Home = () => {
                   bordered
                 />
                 <Paragraph style={{ fontSize: "14px" }}>
-                  <strong>Stages of CKD:</strong>
+                  <strong className="sub-stage">Stages of CKD:</strong>
                 </Paragraph>
 
                 <div style={{ overflowX: "auto", width: "100%" }}>
@@ -341,10 +340,10 @@ const Home = () => {
                 </div>
 
                 <Title
-                  className="title"
+                  className=" sub-stage"
                   level={3}
                   style={{ fontSize: "20px", margin: "24px 0 12px 0" }}
-                >
+                  >
                   Global Prevalence of Chronic Kidney Disease (CKD)
                 </Title>
                 <Paragraph style={{ fontSize: "14px" }}>
@@ -358,7 +357,7 @@ const Home = () => {
                 </Paragraph>
 
                 <Title
-                  className="title"
+                  className="  sub-stage"
                   level={3}
                   style={{ fontSize: "20px", margin: "24px 0 12px 0" }}
                 >
@@ -379,7 +378,7 @@ const Home = () => {
                 </Paragraph>
 
                 <Title
-                  className="title"
+                  className="  sub-stage"
                   level={3}
                   style={{ fontSize: "20px", margin: "24px 0 12px 0" }}
                 >
@@ -388,7 +387,7 @@ const Home = () => {
 
                 <div style={{ fontSize: "14px" }}>
                   <Title
-                    className="title"
+                    className="sub-stage"
                     level={4}
                     style={{ fontSize: "16px", margin: "16px 0 8px 0" }}
                   >
@@ -428,7 +427,7 @@ const Home = () => {
                   </Paragraph>
 
                   <Title
-                    className="title"
+                    className="sub-stage"
                     level={4}
                     style={{ fontSize: "16px", margin: "16px 0 8px 0" }}
                   >
@@ -452,7 +451,7 @@ const Home = () => {
                   </Paragraph>
 
                   <Title
-                    className="title"
+                    className="sub-stage"
                     level={4}
                     style={{ fontSize: "16px", margin: "16px 0 8px 0" }}
                   >
@@ -473,7 +472,7 @@ const Home = () => {
                   </Paragraph>
 
                   <Title
-                    className="title"
+                    className="sub-stage"
                     level={4}
                     style={{ fontSize: "16px", margin: "16px 0 8px 0" }}
                   >

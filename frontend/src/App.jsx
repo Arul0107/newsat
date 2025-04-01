@@ -15,10 +15,10 @@ const App = () => {
       <Toaster position="top-right" />
       <Router>
         <Routes>
-          {/* Redirect root path to /home */}
+          
           <Route path="/" element={<Navigate to="/home" replace />} />
 
-          {/* Nested routes inside AppLayout */}
+         
           <Route path="/" element={<AppLayout />}>
             <Route path="home" element={<Home />} />
             <Route path="about" element={<About />} />
@@ -27,7 +27,7 @@ const App = () => {
             <Route path="contact" element={<Contact />} />
           </Route>
 
-          {/* Catch-all for unknown routes */}
+        
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </Router>

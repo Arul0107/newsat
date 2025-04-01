@@ -21,7 +21,7 @@ const AppLayout = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
 
-  // Menu items configuration
+  
   const menuItems = [
     { key: "home", icon: <DashboardOutlined />, label: "Home", path: "/home" },
     { key: "about", icon: <AppstoreOutlined />, label: "About", path: "/about" },
@@ -32,7 +32,7 @@ const AppLayout = () => {
 
   const selectedKey = menuItems.find((item) => item.path === location.pathname)?.key || "home";
 
-  // Check for mobile screen size and auto-collapse sidebar
+
   useEffect(() => {
     const checkScreenSize = () => {
       const mobile = window.innerWidth < 768;
@@ -42,19 +42,18 @@ const AppLayout = () => {
       }
     };
 
-    // Initial check
+   
     checkScreenSize();
 
-    // Listen for window resize
+   
     window.addEventListener("resize", checkScreenSize);
 
-    // Cleanup
+    
     return () => {
       window.removeEventListener("resize", checkScreenSize);
     };
   }, []);
 
-  // Handle navigation from menu
   const handleMenuClick = ({ key }) => {
     const selectedItem = menuItems.find((item) => item.key === key);
     if (selectedItem) {
@@ -65,7 +64,6 @@ const AppLayout = () => {
     }
   };
 
-  // Generate breadcrumbs from current path
   const breadcrumbs = location.pathname
     .split("/")
     .filter((part) => part)
@@ -74,7 +72,6 @@ const AppLayout = () => {
       label: part.charAt(0).toUpperCase() + part.slice(1),
     }));
 
-  // Render the menu component for reuse in both sidebar and drawer
   const renderMenu = () => (
     <Menu 
       theme="light" 
@@ -93,7 +90,7 @@ const AppLayout = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      {/* Desktop Sidebar - hidden on mobile */}
+     
       {!isMobile && (
         <Sider
           collapsible
@@ -133,7 +130,7 @@ const AppLayout = () => {
         </Sider>
       )}
 
-      {/* Mobile Drawer - only shown on mobile */}
+    
       <Drawer
         title={
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -150,12 +147,12 @@ const AppLayout = () => {
         {renderMenu()}
       </Drawer>
 
-      {/* Main Layout */}
+
       <Layout style={{ 
         marginLeft: isMobile ? 0 : (collapsed ? 80 : 250), 
         transition: "margin-left 0.3s" 
       }}>
-        {/* Header */}
+    
         <Header
           style={{
             position: "fixed",
@@ -221,7 +218,7 @@ const AppLayout = () => {
           </div>
         </Header>
 
-        {/* Content */}
+       
         <Content style={{ 
           marginTop: 64, 
           padding: isMobile ? 12 : 24, 
@@ -231,7 +228,7 @@ const AppLayout = () => {
           <Outlet />
         </Content>
 
-        {/* Footer */}
+    
         <Footer style={{ 
           textAlign: "center",
           padding: isMobile ? "10px" : "20px",

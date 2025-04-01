@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import './Login.css'; // Import the CSS file for styling
+import './Login.css'; 
 
 const Login = () => {
   const [employeeId, setEmployeeId] = useState('');
